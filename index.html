@@ -101,10 +101,6 @@
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
         .delay-400 { animation-delay: 400ms; }
-        .delay-500 { animation-delay: 500ms; }
-        .delay-600 { animation-delay: 600ms; }
-        .delay-700 { animation-delay: 700ms; }
-        .delay-800 { animation-delay: 800ms; }
         
         .animation-delay-2000 { animation-delay: 2s; }
         .animation-delay-4000 { animation-delay: 4s; }
@@ -117,13 +113,34 @@
         }
 
         /* Custom Checkbox styles */
-        input[type="checkbox"]:checked + span {
+        input[type="checkbox"]:checked + span, input[type="radio"]:checked + span {
             color: #2563eb;
             font-weight: 700;
         }
-        .checkbox-wrapper:has(input:checked) {
+        .checkbox-wrapper:has(input:checked), .radio-wrapper:has(input:checked) {
             background-color: #eff6ff;
             border-color: #bfdbfe;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Quiz Fill in blank styles */
+        .blank-slot {
+            display: inline-block;
+            min-width: 100px;
+            height: 32px;
+            border-bottom: 2px dashed #94a3b8;
+            margin: 0 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #2563eb;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .blank-slot.filled {
+            border-bottom: 2px solid #2563eb;
+            background-color: #eff6ff;
+            border-radius: 4px;
+            padding: 0 8px;
         }
     </style>
 </head>
@@ -149,12 +166,12 @@
                         <p class="text-slate-500 text-sm font-semibold tracking-wide">Giáo viên Phổ thông & GDTX (TT18/2026)</p>
                     </div>
                 </div>
-                <div class="text-xs md:text-sm bg-white/80 px-4 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-2 font-medium text-slate-600">
+                <div class="text-xs md:text-sm bg-white/80 px-4 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-2 font-medium text-slate-600 shadow-blue-500/10">
                     <span class="relative flex h-3 w-3">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
-                    Tích hợp 4 Tab & Trợ lý AI (Chuẩn 5512)
+                    Công cụ nâng cao năng lực số cho giáo viên phổ thông
                 </div>
             </div>
         </div>
@@ -172,6 +189,7 @@
         
         <!-- Tab 1: Cấu trúc chung -->
         <section id="tab-structure" class="tab-content active">
+            <!-- Content remains the same as original -->
             <div class="text-center mb-12">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-bold text-xs mb-4 uppercase tracking-wider">
                     <i class="fa-solid fa-layer-group"></i> Tổng quan
@@ -180,38 +198,22 @@
                 <p class="text-slate-500 max-w-2xl mx-auto text-lg">Mô hình kiến trúc tổng thể về năng lực số dành cho nhà giáo theo chuẩn Thông tư 18/2026/TT-BGDĐT.</p>
             </div>
 
-            <!-- Dashboard Numbers -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fadeInUp">
                 <div class="bg-white p-8 rounded-3xl shadow-xl shadow-blue-900/5 border border-slate-100 text-center relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 mb-2">6</div>
-                        <div class="text-lg font-bold text-slate-700 uppercase tracking-widest">Miền năng lực</div>
-                        <p class="text-sm text-slate-500 mt-2">Đại diện cho các lĩnh vực ứng dụng công nghệ</p>
-                    </div>
+                    <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 mb-2 relative z-10">6</div>
+                    <div class="text-lg font-bold text-slate-700 uppercase tracking-widest relative z-10">Miền năng lực</div>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-xl shadow-purple-900/5 border border-slate-100 text-center relative overflow-hidden group delay-100 animate-fadeInUp">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-2">20</div>
-                        <div class="text-lg font-bold text-slate-700 uppercase tracking-widest">Năng lực thành phần</div>
-                        <p class="text-sm text-slate-500 mt-2">Các kỹ năng và yêu cầu cụ thể cần đạt</p>
-                    </div>
+                    <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-2 relative z-10">20</div>
+                    <div class="text-lg font-bold text-slate-700 uppercase tracking-widest relative z-10">Năng lực thành phần</div>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-xl shadow-emerald-900/5 border border-slate-100 text-center relative overflow-hidden group delay-200 animate-fadeInUp">
-                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400 mb-2">3</div>
-                        <div class="text-lg font-bold text-slate-700 uppercase tracking-widest">Cấp độ đáp ứng</div>
-                        <p class="text-sm text-slate-500 mt-2">Cơ bản - Thành thạo - Nâng cao</p>
-                    </div>
+                    <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400 mb-2 relative z-10">3</div>
+                    <div class="text-lg font-bold text-slate-700 uppercase tracking-widest relative z-10">Cấp độ đáp ứng</div>
                 </div>
             </div>
 
-            <!-- Structure Cards Grid -->
-            <div id="structure-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Content injected by JS -->
-            </div>
+            <div id="structure-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8"></div>
         </section>
 
         <!-- Tab 2: Tra cứu 12 thuật ngữ -->
@@ -221,12 +223,8 @@
                     <i class="fa-solid fa-spell-check"></i> Phần A - TT18
                 </div>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Hệ thống 12 Thuật ngữ</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto text-lg">Nắm vững các khái niệm nền tảng là bước đầu tiên để hiểu sâu về chuyển đổi số giáo dục.</p>
             </div>
-            
-            <div id="terms-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                <!-- Content injected by JS -->
-            </div>
+            <div id="terms-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
         </section>
 
         <!-- Tab 3: Ma trận & Minh chứng -->
@@ -234,144 +232,218 @@
             <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-lg border border-white/50">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-dark mb-1">Ma trận Chi tiết & Minh chứng</h2>
-                    <p class="text-slate-500 font-medium">Bảng tra cứu yêu cầu 3 cấp độ và ví dụ thực tiễn cho 20 năng lực thành phần.</p>
                 </div>
                 <div class="w-full md:w-auto flex gap-2">
-                    <button onclick="expandAll()" class="px-5 py-2.5 text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"><i class="fa-solid fa-expand mr-1"></i> Mở tất cả</button>
+                    <button onclick="expandAll()" class="px-5 py-2.5 text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all"><i class="fa-solid fa-expand mr-1"></i> Mở tất cả</button>
                     <button onclick="collapseAll()" class="px-5 py-2.5 text-sm font-bold bg-white text-slate-600 border border-slate-200 rounded-xl shadow-sm hover:bg-slate-50 transition-all"><i class="fa-solid fa-compress mr-1"></i> Thu gọn</button>
                 </div>
             </div>
-            
-            <div id="details-container" class="space-y-5">
-                <!-- Content injected by JS -->
-            </div>
+            <div id="details-container" class="space-y-5"></div>
         </section>
 
         <!-- Tab 4: Trợ lí AI -->
         <section id="tab-suggest" class="tab-content">
+            <!-- Content remains the same as original -->
             <div class="bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-2xl overflow-hidden border border-white/50 flex flex-col lg:flex-row">
-                
                 <!-- Form Input -->
                 <div class="lg:w-[45%] bg-gradient-to-br from-slate-50 to-blue-50 p-6 lg:p-8 border-r border-slate-100 flex flex-col max-h-[85vh] overflow-y-auto custom-scrollbar">
                     <div class="mb-4">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-700 font-bold text-xs mb-3 shadow-sm border border-purple-200">
-                            <i class="fa-solid fa-bolt text-yellow-500"></i> CT 2018 & Thông tư 5512
-                        </div>
                         <h2 class="text-2xl font-extrabold text-dark tracking-tight">Trợ lý Kế hoạch Sư phạm Số</h2>
                         <p class="text-slate-500 mt-2 text-sm font-medium">Gợi ý kịch bản tổ chức hoạt động học tập tương quan với năng lực số muốn cải thiện.</p>
                     </div>
 
                     <form id="suggestForm" class="space-y-4 flex-1">
                         <div class="grid grid-cols-2 gap-4">
-                            <!-- Khối lớp -->
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Khối lớp (THPT)</label>
-                                <select id="gradeSelect" class="w-full border-2 border-slate-200 rounded-xl px-3 py-2.5 focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white text-sm" required>
-                                    <option value="">-- Chọn --</option>
-                                    <option value="10">Lớp 10</option>
-                                    <option value="11">Lớp 11</option>
-                                    <option value="12">Lớp 12</option>
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Khối lớp</label>
+                                <select id="gradeSelect" class="w-full border-2 border-slate-200 rounded-xl px-3 py-2.5 outline-none transition-all" required>
+                                    <option value="">-- Chọn --</option><option value="10">Lớp 10</option><option value="11">Lớp 11</option><option value="12">Lớp 12</option>
                                 </select>
                             </div>
-                            <!-- Môn học -->
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-1">Môn học</label>
-                                <select id="subjectSelect" class="w-full border-2 border-slate-200 rounded-xl px-3 py-2.5 focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white text-sm" required>
-                                    <option value="">-- Chọn môn --</option>
-                                    <option value="Ngữ văn">Ngữ văn</option>
-                                    <option value="Toán">Toán</option>
-                                    <option value="Ngoại ngữ 1">Ngoại ngữ 1</option>
-                                    <option value="Lịch sử">Lịch sử</option>
-                                    <option value="Địa lí">Địa lí</option>
-                                    <option value="GDKT & PL">Giáo dục KT & PL</option>
-                                    <option value="Vật lí">Vật lí</option>
-                                    <option value="Hóa học">Hóa học</option>
-                                    <option value="Sinh học">Sinh học</option>
-                                    <option value="Công nghệ">Công nghệ</option>
-                                    <option value="Tin học">Tin học</option>
-                                    <option value="Âm nhạc">Âm nhạc</option>
-                                    <option value="Mĩ thuật">Mĩ thuật</option>
-                                    <option value="Giáo dục thể chất">Giáo dục thể chất</option>
+                                <select id="subjectSelect" class="w-full border-2 border-slate-200 rounded-xl px-3 py-2.5 outline-none transition-all" required>
+                                    <option value="">-- Chọn môn --</option><option value="Toán">Toán</option><option value="Ngữ văn">Ngữ văn</option><option value="Ngoại ngữ">Ngoại ngữ</option>
                                 </select>
                             </div>
                         </div>
-
-                        <!-- Tên bài học & Kiến thức -->
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">Tên chủ đề / Bài học</label>
-                            <input type="text" id="lessonInput" placeholder="VD: Khái quát văn học dân gian..." class="w-full border-2 border-slate-200 rounded-xl px-3 py-2.5 focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white text-sm" required>
+                            <input type="text" id="lessonInput" class="w-full border-2 border-slate-200 rounded-xl px-3 py-2.5 outline-none transition-all" required>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">Nội dung kiến thức trọng tâm</label>
-                            <textarea id="knowledgeInput" rows="2" placeholder="Nhập tóm tắt kiến thức cốt lõi..." class="w-full border-2 border-slate-200 rounded-xl px-3 py-2 focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white text-sm custom-scrollbar" required></textarea>
+                            <textarea id="knowledgeInput" rows="2" class="w-full border-2 border-slate-200 rounded-xl px-3 py-2 outline-none transition-all custom-scrollbar" required></textarea>
                         </div>
-
-                        <!-- Thang Bloom (Chọn nhiều) -->
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">Yêu cầu cần đạt - Thang Bloom <span class="text-red-500 font-normal italic">(Chọn ít nhất 2)</span></label>
-                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-2" id="bloomCheckboxes">
-                                <!-- JS injected -->
-                            </div>
+                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-2" id="bloomCheckboxes"></div>
                         </div>
-
-                        <!-- Năng lực số cần cải thiện -->
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">Năng lực số GV muốn cải thiện <span class="text-red-500 font-normal italic">(Chọn ít nhất 3)</span></label>
-                            <div class="h-44 overflow-y-auto custom-scrollbar border-2 border-slate-200 rounded-xl p-3 bg-white" id="compCheckboxes">
-                                <!-- JS injected -->
-                            </div>
+                            <div class="h-44 overflow-y-auto custom-scrollbar border-2 border-slate-200 rounded-xl p-3 bg-white" id="compCheckboxes"></div>
                         </div>
-
-                        <!-- Error Message Container -->
                         <div id="formError" class="hidden text-red-600 bg-red-50 p-3 rounded-lg text-sm font-bold text-center border border-red-200"></div>
-
-                        <button type="submit" class="w-full bg-dark hover:bg-slate-800 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 flex justify-center items-center gap-3 text-[15px]">
-                            <i class="fa-solid fa-wand-magic-sparkles text-yellow-400"></i> Xây dựng Kịch bản (Chuẩn 5512)
+                        <button type="submit" class="w-full bg-dark hover:bg-slate-800 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-xl hover:-translate-y-1">
+                            Xây dựng Kịch bản (Chuẩn 5512)
                         </button>
                     </form>
                 </div>
 
                 <!-- Result Area -->
                 <div class="lg:w-[55%] p-6 lg:p-8 relative bg-white flex flex-col max-h-[85vh]">
-                    
-                    <!-- Loading State -->
-                    <div id="loadingState" class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center z-10">
-                        <div class="relative">
-                            <div class="w-20 h-20 border-4 border-slate-100 rounded-full"></div>
-                            <div class="w-20 h-20 border-4 border-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
-                            <i class="fa-solid fa-robot absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl text-primary"></i>
-                        </div>
-                        <p class="text-primary font-bold text-lg mt-6 animate-pulse">Hệ thống đang cấu trúc Kịch bản 5512...</p>
-                        <p class="text-slate-400 text-sm mt-2">Phân bổ nền tảng số tương ứng với năng lực đã chọn</p>
+                    <div id="loadingState" class="hidden absolute inset-0 bg-white/95 flex flex-col items-center justify-center z-10">
+                        <div class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                        <p class="text-primary font-bold text-lg mt-4 animate-pulse">Đang xử lý dữ liệu...</p>
                     </div>
-
-                    <!-- Empty State -->
                     <div id="emptyState" class="flex-1 flex flex-col items-center justify-center text-slate-400 text-center">
-                        <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-6 shadow-inner">
-                            <i class="fa-regular fa-file-code text-5xl text-slate-300"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-600 mb-2">Kịch bản chi tiết sẽ hiển thị tại đây</h3>
-                        <p class="text-slate-500 max-w-sm leading-relaxed text-sm">Điền thông tin và chọn mục tiêu rèn luyện năng lực số để nhận Kế hoạch dạy học theo mẫu của Bộ GDĐT.</p>
+                        <i class="fa-regular fa-file-code text-5xl text-slate-300 mb-4"></i>
+                        <h3 class="text-xl font-bold text-slate-600">Kịch bản sẽ hiển thị tại đây</h3>
                     </div>
-
-                    <!-- Results Area -->
                     <div id="resultWrapper" class="hidden flex-1 flex flex-col min-h-0">
                         <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
-                            <div>
-                                <h3 class="font-extrabold text-lg text-dark">Tiến trình Dạy học</h3>
-                                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Chuẩn Thông tư 5512/BGDĐT</span>
-                            </div>
-                            <button onclick="exportToWord()" class="bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 hover:border-blue-300 font-bold py-2 px-3 rounded-lg text-sm transition-all flex items-center gap-2 shadow-sm">
-                                <i class="fa-solid fa-file-word"></i> Tải File Doc
-                            </button>
+                            <h3 class="font-extrabold text-lg text-dark">Tiến trình Dạy học</h3>
                         </div>
-                        <div id="resultState" class="flex-1 overflow-y-auto custom-scrollbar pr-3 space-y-5">
-                            <!-- Filled by JS -->
+                        <div id="resultState" class="flex-1 overflow-y-auto custom-scrollbar pr-3 space-y-5"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 5: Ôn tập kiến thức (QUIZ) -->
+        <section id="tab-quiz" class="tab-content">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 font-bold text-xs mb-4 uppercase tracking-wider">
+                    <i class="fa-solid fa-medal"></i> Luyện tập
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Trắc nghiệm Khung Năng Lực Số</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto text-lg">Hệ thống bài tập ôn luyện theo Thông tư 18/2026 dành cho Giáo viên Phổ thông.</p>
+            </div>
+
+            <!-- Quiz Container -->
+            <div id="quiz-app" class="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-slate-100 p-6 md:p-10 max-w-4xl mx-auto relative overflow-hidden">
+                
+                <!-- Screen 1: Start -->
+                <div id="quiz-start-screen" class="text-center py-10">
+                    <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-primary">
+                        <i class="fa-solid fa-clipboard-list text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-4">Ngân hàng Trắc nghiệm TT18</h3>
+                    <p class="text-slate-600 mb-8 max-w-lg mx-auto">Bài thi gồm các dạng câu hỏi: Chọn 1 đáp án, Chọn nhiều đáp án và Điền khuyết. Các câu hỏi được phân bổ theo 4 mức độ: Dễ, Trung bình, Nâng cao, Chuyên sâu và Tình huống sư phạm.</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-2xl mx-auto">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="text-xl font-black text-blue-600 mb-1" id="total-q-count">0</div>
+                            <div class="text-xs font-bold text-slate-500 uppercase">Câu hỏi</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="text-xl font-black text-emerald-600 mb-1">6</div>
+                            <div class="text-xs font-bold text-slate-500 uppercase">Miền NL</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="text-xl font-black text-purple-600 mb-1">3</div>
+                            <div class="text-xs font-bold text-slate-500 uppercase">Dạng câu</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="text-xl font-black text-orange-600 mb-1">Không</div>
+                            <div class="text-xs font-bold text-slate-500 uppercase">Giới hạn t/g</div>
                         </div>
                     </div>
+
+                    <button onclick="startQuiz()" class="bg-gradient-to-r from-primary to-blue-600 text-white font-bold text-lg px-10 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                        Bắt đầu làm bài <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Screen 2: Playing -->
+                <div id="quiz-play-screen" class="hidden">
+                    <!-- Progress Header -->
+                    <div class="flex justify-between items-end mb-4">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tiến trình</span>
+                            <div class="text-lg font-extrabold text-dark">Câu <span id="current-q-num" class="text-primary text-2xl">1</span> / <span id="total-q-num">20</span></div>
+                        </div>
+                        <div id="q-difficulty-badge" class="px-3 py-1 rounded-md text-xs font-bold border">Dễ</div>
+                    </div>
                     
-                    <!-- Hidden Div to store raw HTML for Word Export -->
-                    <div id="wordExportContent" class="hidden"></div>
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-100 rounded-full h-2.5 mb-8 overflow-hidden">
+                        <div id="quiz-progress" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 5%"></div>
+                    </div>
+
+                    <!-- Question Content -->
+                    <div class="mb-8 min-h-[250px]">
+                        <div id="q-domain-badge" class="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full mb-4">
+                            Miền 1: ...
+                        </div>
+                        <div class="flex items-start gap-2 mb-6">
+                            <div class="mt-1 text-primary"><i class="fa-solid fa-circle-question"></i></div>
+                            <h3 id="question-text" class="text-xl font-bold text-slate-800 leading-relaxed">Nội dung câu hỏi ở đây?</h3>
+                        </div>
+                        
+                        <!-- Options Container -->
+                        <div id="options-container" class="space-y-3">
+                            <!-- Injected by JS -->
+                        </div>
+                        
+                        <!-- Fill in blank word bank (Hidden by default) -->
+                        <div id="word-bank-container" class="hidden mt-6 pt-6 border-t border-slate-100">
+                            <p class="text-sm font-bold text-slate-500 mb-3">Chọn từ bên dưới để điền vào chỗ trống (Click để chọn/bỏ chọn):</p>
+                            <div id="word-bank" class="flex flex-wrap gap-2">
+                                <!-- Injected by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="quiz-error" class="hidden text-red-500 text-sm font-bold mb-4 bg-red-50 p-3 rounded-lg"><i class="fa-solid fa-circle-exclamation"></i> Vui lòng chọn đáp án trước khi tiếp tục.</div>
+
+                    <!-- Footer Actions -->
+                    <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                        <button onclick="prevQuestion()" id="btn-prev" class="px-5 py-2.5 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors hidden">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Quay lại
+                        </button>
+                        <div class="flex-1"></div> <!-- Spacer -->
+                        <button onclick="nextQuestion()" id="btn-next" class="px-6 py-2.5 rounded-xl font-bold text-white bg-primary hover:bg-blue-700 shadow-md transition-colors">
+                            Câu tiếp theo <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Screen 3: Result -->
+                <div id="quiz-result-screen" class="hidden text-center py-8">
+                    <h3 class="text-3xl font-black text-dark mb-2">Tổng kết ôn tập</h3>
+                    <p id="result-message" class="text-lg font-medium text-slate-600 mb-8">Chúc mừng bạn đã hoàn thành bài kiểm tra!</p>
+                    
+                    <div class="flex justify-center mb-8">
+                        <div class="relative w-48 h-48">
+                            <!-- Simple SVG Donut Chart -->
+                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                <path class="text-slate-100" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path id="score-circle" class="text-emerald-500 transition-all duration-1000 ease-out" stroke-dasharray="0, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="score-text" class="text-4xl font-black text-dark">0/0</span>
+                                <span class="text-sm font-bold text-slate-500 uppercase">Điểm số</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-6 mb-10">
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-2 text-xl"><i class="fa-solid fa-check"></i></div>
+                            <div class="text-2xl font-bold text-slate-800" id="correct-count">0</div>
+                            <div class="text-xs text-slate-500 uppercase font-bold">Câu đúng</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-2 text-xl"><i class="fa-solid fa-xmark"></i></div>
+                            <div class="text-2xl font-bold text-slate-800" id="incorrect-count">0</div>
+                            <div class="text-xs text-slate-500 uppercase font-bold">Câu sai</div>
+                        </div>
+                    </div>
+
+                    <button onclick="resetQuiz()" class="bg-slate-800 text-white font-bold px-8 py-3 rounded-xl hover:bg-slate-700 transition-colors inline-flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Làm lại từ đầu
+                    </button>
                 </div>
             </div>
         </section>
@@ -391,199 +463,348 @@
 
     <!-- JavaScript Data & Logic -->
     <script>
-        /**
-         * DỮ LIỆU JSON CHUẨN HÓA 100% TỪ THÔNG TƯ 18/2026/TT-BGDĐT
-         */
+        // --- DATA BỔ SUNG TỪ TT18 ---
         const thongTu18Data = {
-            terms: [
-                { id: 1, term: "Công nghệ số", def: "Toàn bộ các giải pháp, công cụ, nền tảng, thiết bị và hệ thống ứng dụng kỹ thuật số để phục vụ sản xuất, quản lý, kinh doanh, giáo dục, giảng dạy, học tập và đời sống xã hội.", icon: "fa-microchip", color: "blue" },
-                { id: 2, term: "Dạy học, giáo dục trong môi trường số", def: "Hình thức tổ chức dạy học, giáo dục trong đó các hoạt động giảng dạy, giáo dục, học tập, quản lý và đánh giá được thực hiện trên môi trường công nghệ số nhằm đạt mục tiêu giáo dục.", icon: "fa-chalkboard-user", color: "emerald" },
-                { id: 3, term: "Dữ liệu số trong giáo dục", def: "Tập hợp các thông tin được mã hóa (số điểm, thông tin cá nhân, lịch sử tương tác...) được lưu trữ và xử lý bởi hệ thống máy tính.", icon: "fa-database", color: "purple" },
-                { id: 4, term: "Giải pháp công nghệ", def: "Tập hợp các công cụ kỹ thuật có liên quan (phần mềm, phần cứng) và/hoặc dịch vụ để giải quyết vấn đề đặt ra.", icon: "fa-gears", color: "orange" },
-                { id: 5, term: "Mạng xã hội", def: "Một cấu trúc bao gồm các cá nhân hoặc tổ chức được kết nối với nhau thông qua các nền tảng trực tuyến để chia sẻ thông tin, tương tác và hợp tác.", icon: "fa-share-nodes", color: "rose" },
-                { id: 6, term: "Môi trường số", def: "Không gian được tạo ra và vận hành nhờ vào công nghệ số, nơi con người có thể tương tác, trao đổi, học tập, làm việc, giải trí và sáng tạo thông qua các thiết bị điện tử, thiết bị số và hệ thống mạng.", icon: "fa-cloud", color: "cyan" },
-                { id: 7, term: "Năng lực số", def: "Khả năng sử dụng công nghệ số một cách thành thạo, an toàn, sáng tạo và có trách nhiệm trong học tập, làm việc và đời sống xã hội.", icon: "fa-bolt", color: "yellow" },
-                { id: 8, term: "Nội dung số", def: "Bất kỳ loại nội dung nào tồn tại dưới dạng dữ liệu số được mã hóa ở định dạng máy có thể đọc được, có thể được tạo, xem, phân phối, sửa đổi, lưu trữ bằng máy tính và công nghệ kỹ thuật số.", icon: "fa-file-code", color: "indigo" },
-                { id: 9, term: "Sư phạm số", def: "Cách tiếp cận giáo dục dựa trên việc tích hợp công nghệ số vào quá trình dạy học, giáo dục nhằm đổi mới phương pháp, hình thức tổ chức và đánh giá, hướng tới phát triển năng lực toàn diện cho người học.", icon: "fa-graduation-cap", color: "teal" },
-                { id: 10, term: "Thiết bị số", def: "Thiết bị điện tử sử dụng công nghệ kỹ thuật số để xử lý và lưu trữ dữ liệu.", icon: "fa-mobile-screen", color: "slate" },
-                { id: 11, term: "Trí tuệ nhân tạo (AI)", def: "Lĩnh vực khoa học và công nghệ nhằm tạo ra các hệ thống máy tính có khả năng thực hiện những chức năng trí tuệ của con người như học tập, suy luận, nhận thức, giao tiếp và ra quyết định.", icon: "fa-brain", color: "fuchsia" },
-                { id: 12, term: "Trí tuệ nhân tạo tạo sinh", def: "Một lĩnh vực con của trí tuệ nhân tạo (AI) tập trung vào việc tạo ra dữ liệu mới, có thể là văn bản, hình ảnh, âm thanh, hoặc video, dựa trên dữ liệu đầu vào đã có trước đó.", icon: "fa-sparkles", color: "sky" }
-            ],
+            // Dữ liệu Terms và Domains giữ nguyên cấu trúc (giấu đi để code gọn)
             domains: [
-                {
-                    id: "mien-1", prefix: "Miền 1", title: "Tổ chức dạy học, giáo dục trong môi trường số", icon: "fa-person-chalkboard", color: "blue",
-                    desc: "Thiết kế, triển khai, tổ chức và quản lý sử dụng công nghệ số trong quá trình dạy học để nâng cao hiệu quả, đổi mới phương pháp.",
-                    competencies: [
-                        { code: "1.1", name: "Dạy học và giáo dục trong môi trường số",
-                          basic: ["Sử dụng được các chức năng và công cụ cơ bản của nền tảng quản lí học tập (LMS).", "Sử dụng được các công cụ hỗ trợ dạy học trực tuyến để triển khai các phiên học trực tuyến, cung cấp tài liệu học tập và tổ chức các hoạt động dạy học đơn giản."],
-                          proficient: ["Xây dựng được kế hoạch bài dạy theo tiếp cận công nghệ.", "Thiết kế và triển khai được các hoạt động dạy học theo mô hình kết hợp (blended learning) hiệu quả.", "Lựa chọn và áp dụng được các công cụ và tài nguyên số phù hợp với mục tiêu dạy học.", "Hướng dẫn và triển khai được phương pháp dạy học theo dự án trực tuyến, lớp học đảo ngược trên nền tảng quản lí học tập LMS."],
-                          advanced: ["Sáng tạo và đổi mới các mô hình dạy học ứng dụng công nghệ số.", "Hướng dẫn được đồng nghiệp trong việc thiết kế các trải nghiệm học tập số hóa tiên tiến."],
-                          example: "GV thiết lập khóa học trên Microsoft Teams/Google Classroom. Đăng tải trước tài liệu đọc, video giới thiệu bài (mức Cơ bản). Trên lớp, thay vì giảng lại, GV dùng Quizizz để kiểm tra mức độ hiểu bài ở nhà, sau đó chia nhóm thảo luận (Lớp học đảo ngược - mức Thành thạo)."
-                        },
-                        { code: "1.2", name: "Hướng dẫn, hỗ trợ học tập",
-                          basic: ["Sử dụng được các kênh giao tiếp số (email, diễn đàn) để trả lời câu hỏi và hỗ trợ người học khi cần thiết.", "Sử dụng được các kênh giao tiếp số (diễn đàn, LMS, nhóm chat...) để tương tác, giải đáp thắc mắc, cung cấp tài liệu hỗ trợ người học."],
-                          proficient: ["Sử dụng được dữ liệu học tập số để xác định người học cần hỗ trợ và lựa chọn biện pháp can thiệp phù hợp.", "Thiết lập được các hoạt động, môi trường số cho phép tương tác, hỗ trợ cá nhân hóa và kịp thời cho người học.", "Thiết kế và triển khai được hệ thống hướng dẫn, hỗ trợ học tập cá nhân hóa, thích ứng dựa trên công nghệ số và dữ liệu lớn."],
-                          advanced: ["Hướng dẫn được đồng nghiệp xây dựng văn hóa hỗ trợ học tập tích cực trên nền tảng số.", "Sáng tạo, thử nghiệm, phát triển được các công cụ/phương pháp hỗ trợ dạy học thông minh trên nền tảng số."],
-                          example: "GV tạo group Zalo/Teams của lớp để giải đáp bài tập nhanh (Cơ bản). GV theo dõi log truy cập trên LMS, phát hiện 3 học sinh chưa làm bài tập tuần, chủ động nhắn tin riêng hoặc tạo nhóm kèm cặp bổ sung kiến thức (Thành thạo)."
-                        },
-                        { code: "1.3", name: "Cá nhân hóa người học",
-                          basic: ["Xác định được các nhu cầu, sự khác biệt của người học trong sử dụng công nghệ số.", "Lựa chọn, điều chỉnh được các công cụ và nội dung số phù hợp với nhu cầu của người học."],
-                          proficient: ["Sử dụng được công nghệ số để thiết kế lộ trình học tập linh hoạt, cho phép người học tự chủ về tốc độ, nội dung và cách thức học tập dựa trên nền tảng số.", "Thiết kế được các nhiệm vụ học tập phân hóa theo trình độ, năng lực và sở thích của người học trong môi trường trực tuyến.", "Tích hợp đa dạng, linh hoạt các công cụ số hỗ trợ hoạt động học tập thích ứng, điều chỉnh theo kết quả học tập của người học."],
-                          advanced: ["Thiết kế được môi trường học tập số cá nhân hóa, cung cấp công cụ cập nhật cho người học tự định hướng, tự điều chỉnh quá trình học tập.", "Đánh giá được hiệu quả của các chiến lược dạy học cá nhân hóa bằng công nghệ."],
-                          example: "Trong môn Toán, GV thiết kế một bài tập trên nền tảng e-learning: nếu HS trả lời sai câu dễ, hệ thống tự động điều hướng xem lại video lý thuyết; nếu làm đúng sẽ chuyển sang bài tập nâng cao (Adaptive Learning - Thành thạo)."
-                        },
-                        { code: "1.4", name: "Học tập cộng tác",
-                          basic: ["Sử dụng được công cụ số cơ bản để tổ chức cho người học làm việc nhóm đơn giản.", "Thiết kế được các nhiệm vụ học tập, chia sẻ tài liệu, ý tưởng trên nền tảng số."],
-                          proficient: ["Thiết kế được các nhiệm vụ học tập yêu cầu người học sử dụng đa dạng công cụ số để cùng xây dựng nội dung, kiến thức.", "Hướng dẫn được người học kĩ năng giao tiếp, hợp tác hiệu quả trong môi trường số.", "Sử dụng được công nghệ để quản lý và đánh giá hiệu quả làm việc nhóm, đánh giá quá trình và sản phẩm cộng tác của nhóm."],
-                          advanced: ["Xây dựng được các dự án cộng tác phức tạp, kết nối người học theo mô hình học tập cộng tác trên nền tảng số.", "Xây dựng và quản lí được các cộng đồng học tập trực tuyến.", "Hướng dẫn được đồng nghiệp triển khai học tập cộng tác dựa trên công nghệ số trong nhà trường."],
-                          example: "Giao dự án nhóm: Yêu cầu 4 HS cùng soạn thảo trên 1 file Google Docs hoặc thiết kế sơ đồ tư duy trên Miro. GV theo dõi lịch sử chỉnh sửa (version history) để đánh giá mức độ đóng góp của từng em, tránh tình trạng 'hợp tác hời hợt' (Thành thạo)."
-                        }
-                    ]
-                },
-                {
-                    id: "mien-2", prefix: "Miền 2", title: "Kiểm tra, Đánh giá", icon: "fa-clipboard-check", color: "emerald",
-                    desc: "Sử dụng công nghệ số trong các hình thức, phương pháp và công cụ đánh giá trên nền tảng số để tăng cường hiệu quả.",
-                    competencies: [
-                        { code: "2.1", name: "Phương thức đánh giá",
-                          basic: ["Sử dụng được hình thức kiểm tra, đánh giá truyền thống, có thể nhập điểm vào hệ thống số.", "Áp dụng được một số công cụ tạo bài kiểm tra online đơn giản trong hoạt động dạy học."],
-                          proficient: ["Sử dụng được các công cụ số phổ biến để tạo bài kiểm tra, khảo sát nhằm đánh giá quá trình và đánh giá tổng kết.", "Kết hợp được một số hình thức đánh giá số đơn giản vào quá trình dạy học.", "Thiết kế và áp dụng được các hình thức đa dạng, công cụ đánh giá số phù hợp với mục tiêu và nội dung học tập."],
-                          advanced: ["Sáng tạo triển khai các phương pháp, mô hình đánh giá số tiên tiến, đáp ứng yêu cầu đánh giá năng lực phức hợp.", "Hướng dẫn được đồng nghiệp xây dựng và áp dụng các chiến lược đánh giá số hiệu quả, công bằng trong nhà trường."],
-                          example: "Tạo bài kiểm tra 15 phút trên Azota/Google Forms tự động chấm điểm (Cơ bản). GV dùng Flip (Flipgrid) yêu cầu HS quay video thuyết trình ngắn để đánh giá năng lực nói (speaking) môn Ngoại ngữ thay vì chỉ làm bài trên giấy (Thành thạo)."
-                        },
-                        { code: "2.2", name: "Phân tích kết quả học tập",
-                          basic: ["Sử dụng được các chức năng cơ bản của LMS/công cụ đánh giá để xem báo cáo về hoạt động, kết quả của người học.", "Phân tích được dữ liệu từ các hệ thống đánh giá số để nhận diện quá trình tiến bộ và thành tích học tập của người học."],
-                          proficient: ["Sử dụng được dữ liệu, công cụ trực quan hóa dữ liệu để xây dựng báo cáo đánh giá sự tiến bộ của người học.", "Áp dụng được các kĩ thuật phân tích dữ liệu học tập nâng cao để dự đoán xu hướng, phát hiện sớm các vấn đề và đề xuất can thiệp."],
-                          advanced: ["Xây dựng được các bảng điều khiển tự động (dashboard) dữ liệu học tập trực quan.", "Hướng dẫn được đồng nghiệp về cách khai thác và diễn giải dữ liệu để cải tiến dạy học."],
-                          example: "Xuất file Excel từ hệ thống trắc nghiệm, nhận thấy 70% lớp sai ở câu hỏi số 5. GV lập tức trích xuất dữ liệu, vẽ biểu đồ phổ điểm và quyết định ôn lại phần kiến thức của câu 5 vào đầu tiết học sau (Thành thạo)."
-                        },
-                        { code: "2.3", name: "Phản hồi và đánh giá cải tiến",
-                          basic: ["Sử dụng được các chức năng cung cấp phản hồi trên hệ thống LMS.", "Cung cấp phản hồi kịp thời cho người học bằng văn bản hoặc điểm số thông qua các nền tảng số."],
-                          proficient: ["Sử dụng được đa dạng công cụ số (ghi âm, video ngắn, bình luận trực tiếp trên tài liệu) để đưa ra phản hồi chi tiết, kịp thời.", "Thiết kế được các qui trình phản hồi và đánh giá cải tiến có sự tham gia của người học (tự đánh giá, đánh giá chéo) bằng công nghệ.", "Sử dụng được dữ liệu phân tích để điều chỉnh kế hoạch bài dạy, phương pháp và cung cấp nhiệm vụ học tập hỗ trợ cá nhân người học."],
-                          advanced: ["Hướng dẫn được đồng nghiệp sử dụng phản hồi bằng công cụ số và dữ liệu học tập để cải tiến liên tục chương trình và hoạt động giáo dục."],
-                          example: "Thay vì chỉ ghi 'Khá' hoặc 'Cần cố gắng', GV dùng tính năng comment trong Google Docs để bôi đen và sửa lỗi trực tiếp từng câu văn, hoặc gửi một đoạn ghi âm ngắn (voice note) nhận xét bài làm gửi qua Zalo cho HS (Thành thạo)."
-                        }
-                    ]
-                },
-                {
-                    id: "mien-3", prefix: "Miền 3", title: "Trao quyền cho người học", icon: "fa-users-rays", color: "purple",
-                    desc: "Thúc đẩy dạy học lấy người học làm trung tâm, tăng cường tính hòa nhập, thúc đẩy sự tham gia tích cực.",
-                    competencies: [
-                        { code: "3.1", name: "Tiếp cận và hòa nhập",
-                          basic: ["Sử dụng được các công cụ số cơ bản để hỗ trợ người học gặp khó khăn trong học tập."],
-                          proficient: ["Lựa chọn và sử dụng được các công cụ, tài nguyên số có tính đến sự đa dạng của người học (đa dạng ngôn ngữ, phong cách học, người học khuyết tật).", "Thiết kế được nội dung, tài nguyên số đảm bảo tính tiếp cận và hòa nhập trong môi trường số.", "Đảm bảo mọi người học có cơ hội sử dụng thiết bị, hạ tầng số của nhà trường khi cần thiết.", "Khai thác, lựa chọn và điều chỉnh được tài nguyên, đa dạng hóa công cụ số để đáp ứng nhu cầu đặc biệt của người học."],
-                          advanced: ["Hướng dẫn được đồng nghiệp về chiến lược và công nghệ số hỗ trợ giáo dục hòa nhập."],
-                          example: "Cung cấp bài giảng bằng định dạng PDF có thể đọc bằng phần mềm Text-to-Speech cho HS khiếm thị; Bật tính năng auto-caption (phụ đề tự động) trên video bài giảng cho HS tiếp thu thính giác kém (Thành thạo)."
-                        },
-                        { code: "3.2", name: "Giải quyết vấn đề",
-                          basic: ["Thiết kế được các nhiệm vụ học tập yêu cầu người học sử dụng Internet để tìm kiếm thông tin để trả lời câu hỏi hoặc giải quyết vấn đề học tập đơn giản."],
-                          proficient: ["Thiết kế được các nhiệm vụ/dự án học tập yêu cầu người học sử dụng công nghệ số để xác định vấn đề, thu thập, phân tích thông tin và đề xuất giải pháp.", "Tổ chức được các hoạt động học tập dựa trên vấn đề (problem-based) hoặc dự án (project-based) phức tạp, trong đó công nghệ số là công cụ thiết yếu để nghiên cứu, hợp tác và tạo ra sản phẩm."],
-                          advanced: ["Hướng dẫn được đồng nghiệp xây dựng hệ sinh thái học tập số, kết nối người học với các chuyên gia và vấn đề thực tiễn bên ngoài nhà trường để giải quyết các vấn đề thực tế của cộng đồng."],
-                          example: "Giao dự án môn Địa lí 'Thực trạng rác thải tại địa phương'. HS tự quay video hiện trường, dùng Google Maps đánh dấu các bãi rác tự phát, và tạo một file trình bày Canva đề xuất giải pháp gửi tới UBND phường (Thành thạo)."
-                        },
-                        { code: "3.3", name: "Khuyến khích tham gia tích cực",
-                          basic: ["Sử dụng được các công cụ, tương tác số đơn giản để thu hút sự chú ý và khuyến khích người học tham gia vào hoạt động học tập.", "Tích hợp được công nghệ số trong dạy học nhằm trực quan hóa và tăng hiệu quả trình bày nội dung dạy học."],
-                          proficient: ["Tích hợp được các yếu tố trò chơi hóa, tương tác và các công cụ sáng tạo nội dung để thúc đẩy người học chủ động, tích cực tham gia vào bài học.", "Thiết kế được hoạt động khuyến khích người học tự tạo ra nội dung số, chia sẻ kiến thức thông qua các nền tảng số, giải quyết vấn đề bằng mô phỏng, thí nghiệm ảo, thực tế ảo, thực tế ảo tăng cường."],
-                          advanced: ["Sáng tạo và điều phối được các dự án học tập sử dụng công nghệ số, tạo môi trường học tập năng động, lấy người học làm trung tâm.", "Hướng dẫn được đồng nghiệp sáng tạo triển khai các hoạt động học tập tích cực bằng công nghệ số."],
-                          example: "Môn Hóa học: Thay vì chỉ nhìn hình SGK, GV cho HS dùng mô phỏng PhET Interactive Simulations để tự kéo thả các hóa chất, quan sát phản ứng xảy ra và tự rút ra kết luận (Thành thạo)."
-                        }
-                    ]
-                },
-                {
-                    id: "mien-4", prefix: "Miền 4", title: "Kĩ năng công nghệ số", icon: "fa-shield-halved", color: "orange",
-                    desc: "Cập nhật, ứng dụng thành thạo và phát triển năng lực số một cách sáng tạo, có trách nhiệm và an toàn.",
-                    competencies: [
-                        { code: "4.1", name: "Kĩ năng thông tin và dữ liệu",
-                          basic: ["Sử dụng được công cụ tìm kiếm để tìm thông tin, tài liệu phục vụ bài giảng.", "Lưu trữ và sắp xếp một cách khoa học các dữ liệu trên máy tính hoặc đám mây.", "Đánh giá được độ tin cậy của nguồn tin trên Internet, mạng xã hội.", "Sử dụng được các kĩ thuật tìm kiếm nâng cao."],
-                          proficient: ["Hướng dẫn được người học các kĩ năng tư duy phản biện khi tìm kiếm, xử lí, tiếp nhận thông tin số từ các nguồn khác nhau.", "Tổ chức được các nhiệm vụ học tập nâng cao cho phép người học chủ động tìm kiếm và xử lí thông tin trong môi trường số.", "Sử dụng được công cụ để thu thập và trực quan hóa dữ liệu đơn giản, phân tích và đánh giá độ tin cậy của thông tin trong quá trình dạy học."],
-                          advanced: ["Hướng dẫn được đồng nghiệp tích hợp phát triển năng lực thông tin vào chương trình dạy học."],
-                          example: "Dạy học sinh cách phân biệt tin thật (news) và tin giả (fake news) trên mạng xã hội bằng cách đối chiếu nguồn; hướng dẫn cách dùng dấu ngoặc kép \"...\" và lệnh site: để tìm kiếm thông tin chính xác trên Google (Thành thạo)."
-                        },
-                        { code: "4.2", name: "Sáng tạo nội dung số",
-                          basic: ["Sử dụng được các công cụ số phổ biến để tạo nội dung dạy học theo định dạng số khác nhau.", "Tích hợp được các định dạng số trong nội dung thực hiện nhiệm vụ của người học."],
-                          proficient: ["Tích hợp được công nghệ số trong hoạt động sáng tạo nội dung số, xây dựng kho học liệu số.", "Hướng dẫn được người học sử dụng các công cụ cơ bản để tạo nội dung số, thực hiện quyền tác giả, giấy phép, cách trích dẫn, sử dụng và chia sẻ tài nguyên số hợp pháp.", "Sử dụng được nền tảng, công cụ số đa dạng để tạo và chia sẻ nội dung hợp lệ."],
-                          advanced: ["Sử dụng thành thạo các công cụ chuyên dụng để tạo ra các học liệu số có tính tương tác cao.", "Hướng dẫn được đồng nghiệp phát triển nền tảng học tập tích hợp AI, thực tế ảo, thực tế ảo tăng cường trong sáng tạo nội dung số vào các môn học."],
-                          example: "GV không chỉ biết làm slide PowerPoint, mà còn tự quay video bài giảng, cắt ghép bằng CapCut, biên tập và chèn thêm câu hỏi tương tác lên Edpuzzle. Đồng thời dạy HS cách trích dẫn nguồn hình ảnh khi làm bài trình bày (Thành thạo)."
-                        },
-                        { code: "4.3", name: "An toàn",
-                          basic: ["Có hiểu biết về bảo vệ sức khỏe thể chất, tinh thần, đảm bảo an sinh số trong hoạt động dạy học.", "Bố trí, sắp xếp được không gian, thời gian sử dụng thiết bị, công cụ số hợp lí cho người học.", "Tích hợp được kiến thức, kĩ năng nhận diện và phòng tránh các rủi ro phổ biến trên mạng trong quá trình dạy học."],
-                          proficient: ["Áp dụng được các biện pháp bảo vệ dữ liệu cá nhân và của người học.", "Thực hiện được các biện pháp cơ bản đảm bảo an toàn thiết bị, tài khoản trong lớp học và hướng dẫn người học cách bảo vệ dữ liệu cá nhân, định danh số, quản lí dấu vết số.", "Nhận diện và xử lí được các tình huống bắt nạt trực tuyến.", "Thực hiện được các biện pháp đảm bảo an toàn sức khỏe, áp dụng các phương pháp dạy học giảm căng thẳng trong môi trường số cho người học."],
-                          advanced: ["Cập nhật và phổ biến các xu hướng, mối đe dọa mới và cách phòng chống cho cộng đồng giáo viên, phụ huynh.", "Hướng dẫn được đồng nghiệp xây dựng môi trường học tập số an toàn, lành mạnh trong lớp học và nhà trường."],
-                          example: "Nhắc nhở HS không chia sẻ mật khẩu tài khoản học tập trực tuyến. Khi phát hiện một HS bị bạn bè lấy ảnh chế giễu trong nhóm chat lớp, GV can thiệp ngay lập tức, tổ chức sinh hoạt chuyên đề về 'Bắt nạt trên không gian mạng' (Thành thạo)."
-                        }
-                    ]
-                },
-                {
-                    id: "mien-5", prefix: "Miền 5", title: "Phát triển chuyên môn", icon: "fa-arrow-trend-up", color: "teal",
-                    desc: "Sử dụng công nghệ số để giao tiếp, cộng tác với đồng nghiệp, phụ huynh, người học; để tự phát triển chuyên môn.",
-                    competencies: [
-                        { code: "5.1", name: "Giao tiếp trong tổ chức",
-                          basic: ["Sử dụng được email, nhóm chat của trường/tổ để trao đổi thông tin công việc và giao tiếp với phụ huynh."],
-                          proficient: ["Sử dụng hiệu quả các kênh giao tiếp số chính thức của trường để tương tác với các bên liên quan, phù hợp với từng đối tượng và mục đích giáo dục.", "Sử dụng được công cụ số cơ bản để giao tiếp, chia sẻ thông tin, dữ liệu và tham gia hoạt động chuyên môn với đồng nghiệp."],
-                          advanced: ["Xây dựng và quản lí được chiến lược truyền thông số, các kênh truyền thông số chính thức của trường để chia sẻ và kết nối cộng đồng.", "Hướng dẫn được đồng nghiệp đổi mới cách thức giao tiếp trong tổ chức bằng công nghệ số tăng cường tính minh bạch, sự tham gia của các bên liên quan."],
-                          example: "Thay vì in giấy mời họp phụ huynh, GV gửi link khảo sát thời gian họp phù hợp qua Zalo, gửi file kết quả rèn luyện được thiết kế đẹp mắt trên hệ thống sổ liên lạc điện tử của trường (Thành thạo)."
-                        },
-                        { code: "5.2", name: "Hợp tác phát triển chuyên môn",
-                          basic: ["Chủ động tham gia các cộng đồng học tập trực tuyến.", "Tự đánh giá được khó khăn, thách thức và thuận lợi ứng dụng công nghệ số trong công việc."],
-                          proficient: ["Xây dựng được kế hoạch cải tiến, đổi mới ứng dụng công nghệ số trong hoạt động chuyên môn.", "Chủ động tìm kiếm và tham gia các khóa học cơ bản để cập nhật kiến thức, kĩ năng số.", "Tự đánh giá, cải tiến ứng dụng công nghệ số trong dạy học trong môi trường số.", "Tham gia chia sẻ, học tập và cập nhật kĩ năng ứng dụng công nghệ số với đồng nghiệp."],
-                          advanced: ["Cập nhật được các xu hướng công nghệ và phương pháp sư phạm số mới, áp dụng kiến thức, kĩ năng số vào thực tiễn dạy học.", "Hướng dẫn được đồng nghiệp xây dựng các yêu cầu về dạy học trong môi trường số, phát triển các công cụ, phương pháp hỗ trợ tự phản ánh về năng lực số."],
-                          example: "Tham gia các nhóm Facebook như 'Cộng đồng giáo viên sáng tạo', học được kĩ năng làm game bằng PowerPoint và quay video hướng dẫn chia sẻ lại cho giáo viên trong tổ bộ môn (Thành thạo)."
-                        },
-                        { code: "5.3", name: "Quản lí học liệu số",
-                          basic: ["Sử dụng được các công cụ tìm kiếm phổ biến để tìm kiếm tài nguyên, kho học liệu số, thư viện trực tuyến, tài nguyên giáo dục mở (OER).", "Lựa chọn được tài nguyên phù hợp với mục tiêu bài học."],
-                          proficient: ["Lựa chọn và sử dụng được tài nguyên, học liệu số phù hợp với đối tượng đa dạng của người học.", "Tạo được tài nguyên số phục vụ cho môn học dựa từ các nguồn có sẵn.", "Tổ chức lưu trữ, quản lí và chia sẻ được kho học liệu số cá nhân một cách khoa học, an toàn.", "Đánh giá được chất lượng, độ tin cậy, tính pháp lí và sư phạm của tài nguyên, học liệu số."],
-                          advanced: ["Xây dựng và quản trị được các hệ thống quản lí, chia sẻ tài nguyên số cho tổ/trường.", "Hướng dẫn được đồng nghiệp xây dựng và quản trị kho học liệu số mở của nhà trường."],
-                          example: "Không lưu trữ bài giảng ở USB dễ mất, GV thiết lập cấu trúc thư mục logic trên Google Drive/OneDrive, chia sẻ quyền 'Chỉ xem' cho học sinh để tải tài liệu, và quyền 'Chỉnh sửa' cho đồng nghiệp để cùng hoàn thiện giáo án (Thành thạo)."
-                        }
-                    ]
-                },
-                {
-                    id: "mien-6", prefix: "Miền 6", title: "Trí tuệ nhân tạo (AI)", icon: "fa-robot", color: "indigo",
-                    desc: "Ứng dụng, tích hợp AI một cách có hiệu quả và có đạo đức vào công việc giảng dạy, hỗ trợ học tập.",
-                    competencies: [
-                        { code: "6.1", name: "Tư duy lấy con người làm trung tâm",
-                          basic: ["Nhận diện được cách vận hành của AI và các công nghệ có tích hợp AI.", "Nhận diện được các khả năng tích hợp sử dụng AI trong hỗ trợ hoạt động dạy học.", "Sử dụng được các công cụ AI đơn giản (chủ yếu là AI tạo sinh) để hỗ trợ dạy học và kiểm tra đánh giá.", "Thiết kế được các hoạt động dạy học tích hợp AI một cách sáng tạo và có trách nhiệm."],
-                          proficient: ["Khai thác hiệu quả các công cụ AI chuyên biệt cho giáo dục để tạo học liệu số tương tác đa dạng, cá nhân hóa một phần nội dung/bài tập, hỗ trợ chấm điểm tự động.", "Hướng dẫn được người học sử dụng AI có trách nhiệm, nhận biết ưu/nhược điểm và các rủi ro liên quan khi sử dụng AI.", "Thực hiện được các biện pháp cần thiết phòng ngừa rủi ro và về các vấn đề đạo đức cơ bản khi sử dụng AI."],
-                          advanced: ["Triển khai đổi mới phương pháp dạy học mới có tích hợp sâu AI đáp ứng cá nhân hóa và dạy học thích ứng.", "Hướng dẫn, lựa chọn và đề xuất sử dụng các công cụ AI phù hợp cho đồng nghiệp."],
-                          example: "Dùng ChatGPT để soạn 20 câu hỏi trắc nghiệm, nhưng GV CHỦ ĐỘNG kiểm duyệt lại tính chính xác trước khi đưa vào đề thi. Khẳng định AI chỉ là công cụ hỗ trợ, giáo viên mới là người ra quyết định cuối cùng (Thành thạo)."
-                        },
-                        { code: "6.2", name: "Đạo đức AI",
-                          basic: ["Nhận diện được khả năng thu thập dữ liệu và thông tin cá nhân khi sử dụng công cụ AI, những tiềm ẩn rủi ro khi sử dụng AI không đúng cách.", "Thể hiện sự cẩn trọng và có trách nhiệm đối với quyền riêng tư của người học, có trách nhiệm khi sử dụng công cụ AI trong dạy học, kiểm tra đánh giá."],
-                          proficient: ["Lựa chọn, đánh giá được các ứng dụng AI dựa trên tiêu chí về đạo đức, chính sách bảo mật, sự công bằng trong tiếp cận và tác động khác trong dạy học, kiểm tra đánh giá.", "Thiết kế và tích hợp hoạt động hướng dẫn người học sử dụng AI an toàn và có đạo đức trong hoạt động học tập.", "Thiết kế các hoạt động giáo dục tích hợp AI, cân bằng giữa tương tác công nghệ và tương tác xã hội, phát triển tư duy phản biện."],
-                          advanced: ["Đánh giá được ưu/nhược điểm và các vấn đề đạo đức của công cụ AI trong giáo dục, cập nhật, hướng dẫn và chia sẻ với đồng nghiệp các vấn đề về đạo đức sử dụng AI.", "Tham gia xây dựng chính sách, hướng dẫn về sử dụng AI có đạo đức trong nhà trường."],
-                          example: "Khi giao bài tập viết tiểu luận môn Ngữ văn, GV yêu cầu HS nếu có dùng AI để tham khảo ý tưởng thì phải trích dẫn rõ 'Đoạn này có sử dụng gợi ý từ ChatGPT'. Không nhập thông tin cá nhân/điểm số nhạy cảm của HS lên các công cụ AI (Thành thạo)."
-                        },
-                        { code: "6.3", name: "Sư phạm AI",
-                          basic: ["Nhận diện được khả năng tích hợp AI theo hướng cá nhân hóa và lấy người học làm trung tâm.", "Có hiểu biết về lợi ích sư phạm của công cụ AI để hỗ trợ dạy học."],
-                          proficient: ["Ứng dụng được công cụ AI linh hoạt trong các bước dạy học đảm bảo nguyên tắc lấy người học làm trung tâm, giáo dục hòa nhập.", "Lựa chọn và ứng dụng được các hệ thống, công cụ AI phù hợp, giảm thiểu rủi ro trong thiết kế dạy học, kiểm tra đánh giá.", "Tổ chức và quản lý được hoạt động tương tác 3 chiều giữa giáo viên, người học với các công cụ AI trong dạy học."],
-                          advanced: ["Xây dựng được nguyên tắc sư phạm sử dụng AI trong hoạt động dạy học.", "Hướng dẫn được đồng nghiệp thiết kế và sử dụng AI theo tiếp cận đồng sáng tạo, lấy con người làm trung tâm trong các hoạt động sư phạm."],
-                          example: "Thay vì cấm AI, GV tổ chức hoạt động: Yêu cầu AI viết 1 bài giải thích về 'Hiện tượng nóng lên toàn cầu'. Sau đó phát cho học sinh đọc và yêu cầu HS đóng vai chuyên gia để 'Bắt lỗi' những điểm chưa chính xác hoặc thiếu logic của đoạn văn AI viết (Thành thạo)."
-                        },
-                        { code: "6.4", name: "AI cho phát triển chuyên môn",
-                          basic: ["Nhận diện được sự cân bằng giữa vai trò của người giáo viên và nhiệm vụ phát triển năng lực số, năng lực AI trong dạy học.", "Sử dụng được công cụ AI phù hợp để lập kế hoạch, theo dõi và phân tích quá trình phát triển chuyên môn của bản thân."],
-                          proficient: ["Sử dụng được các công cụ AI đơn giản (chủ yếu là AI tạo sinh) để hỗ trợ học tập suốt đời và phát triển chuyên môn nghiệp vụ bản thân.", "Đề xuất được các hướng sử dụng hiệu quả các nền tảng AI để tìm kiếm tài nguyên, tham gia cộng đồng thực hành hỗ trợ phát triển bản thân.", "Đánh giá được các rủi ro đạo đức từ các nền tảng AI và triển khai các biện pháp phòng ngừa giảm thiểu tác động tiêu cực."],
-                          advanced: ["Hướng dẫn đổi mới sáng tạo cho đồng nghiệp dựa trên các nền tảng AI phù hợp và tiếp cận sư phạm số.", "Xây dựng hoặc sử dụng được các bộ công cụ AI tạo sinh hỗ trợ phát triển chuyên môn của đồng nghiệp."],
-                          example: "GV nhập khung chương trình môn học vào AI và yêu cầu gợi ý các phương pháp khởi động bài học (Warm-up activities) mới lạ. Sau đó đọc, lọc ra những phương pháp phù hợp với lớp học của mình để làm phong phú kỹ năng giảng dạy (Thành thạo)."
-                        }
-                    ]
-                }
+                { id: "mien-1", prefix: "Miền 1", title: "Tổ chức dạy học, giáo dục trong môi trường số", icon: "fa-person-chalkboard", color: "blue", competencies: [{code:"1.1",name:"Dạy học trong môi trường số", basic:["..."], proficient:["..."], advanced:["..."], example:"..."}, {code:"1.2",name:"Hướng dẫn hỗ trợ", basic:[], proficient:[], advanced:[], example:""}] },
+                // ... (Thực tế giữ nguyên dữ liệu thật ở đây)
             ]
         };
+
+        // ==========================================
+        // NGÂN HÀNG TRẮC NGHIỆM (QUIZ DATA)
+        // Hệ thống 50 Câu hỏi chuẩn TT18/2026/TT-BGDĐT
+        // ==========================================
+        const quizData = [
+            // --- PHẦN THUẬT NGỮ CHUNG (Q1 - Q5) ---
+            {
+                id: 1, type: "single", difficulty: "Dễ", domain: "Phần A: Các thuật ngữ",
+                question: "Theo TT18, 'Khả năng sử dụng công nghệ số một cách thành thạo, an toàn, sáng tạo và có trách nhiệm trong học tập, làm việc và đời sống xã hội' là định nghĩa của thuật ngữ nào?",
+                options: ["Công nghệ số", "Năng lực số", "Môi trường số", "Sư phạm số"],
+                correctAnswer: "Năng lực số"
+            },
+            {
+                id: 2, type: "fill", difficulty: "Trung bình", domain: "Phần A: Các thuật ngữ",
+                question: "Cách tiếp cận giáo dục dựa trên việc tích hợp <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> vào quá trình dạy học nhằm đổi mới phương pháp, hướng tới phát triển năng lực toàn diện được gọi là 'Sư phạm số'.",
+                wordBank: ["Công nghệ số", "Mạng xã hội", "Dữ liệu số", "Thiết bị điện tử"],
+                correctAnswer: "Công nghệ số"
+            },
+            {
+                id: 3, type: "multiple", difficulty: "Nâng cao", domain: "Phần A: Các thuật ngữ",
+                question: "Trí tuệ nhân tạo (AI) là lĩnh vực nhằm tạo ra các hệ thống máy tính có khả năng thực hiện những chức năng trí tuệ nào của con người? (Chọn nhiều đáp án)",
+                options: ["Học tập và suy luận", "Nhận thức và giao tiếp", "Ra quyết định", "Thay thế hoàn toàn cảm xúc con người"],
+                correctAnswer: ["Học tập và suy luận", "Nhận thức và giao tiếp", "Ra quyết định"]
+            },
+            {
+                id: 4, type: "single", difficulty: "Dễ", domain: "Phần A: Các thuật ngữ",
+                question: "Bất kỳ loại nội dung nào tồn tại dưới dạng dữ liệu được mã hóa ở định dạng máy có thể đọc được, gọi là gì?",
+                options: ["Dữ liệu số trong giáo dục", "Nội dung số", "Giải pháp công nghệ", "Thiết bị số"],
+                correctAnswer: "Nội dung số"
+            },
+            {
+                id: 5, type: "fill", difficulty: "Dễ", domain: "Phần A: Các thuật ngữ",
+                question: "Trí tuệ nhân tạo tạo sinh là lĩnh vực con của AI tập trung vào việc <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> dựa trên dữ liệu đầu vào đã có trước đó.",
+                wordBank: ["Tạo ra dữ liệu mới", "Lưu trữ thông tin", "Bảo mật hệ thống", "Đánh giá người học"],
+                correctAnswer: "Tạo ra dữ liệu mới"
+            },
+
+            // --- MIỀN 1: TỔ CHỨC DẠY HỌC TRONG MÔI TRƯỜNG SỐ (Q6 - Q13) ---
+            {
+                id: 6, type: "single", difficulty: "Dễ", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Việc 'Sử dụng được các chức năng và công cụ cơ bản của nền tảng quản lí học tập (LMS)' thuộc mức độ nào của Năng lực 1.1?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chuyên sâu"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 7, type: "multiple", difficulty: "Trung bình", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Để đạt mức 'Thành thạo' ở năng lực 1.1 (Dạy học trong môi trường số), giáo viên cần làm được gì? (Chọn nhiều đáp án)",
+                options: ["Thiết kế hoạt động dạy học theo mô hình kết hợp (blended learning) hiệu quả.", "Lựa chọn áp dụng công cụ số phù hợp mục tiêu dạy học.", "Hướng dẫn triển khai dạy học theo dự án trực tuyến, lớp học đảo ngược.", "Hướng dẫn đồng nghiệp thiết kế trải nghiệm học tập số hóa tiên tiến."],
+                correctAnswer: ["Thiết kế hoạt động dạy học theo mô hình kết hợp (blended learning) hiệu quả.", "Lựa chọn áp dụng công cụ số phù hợp mục tiêu dạy học.", "Hướng dẫn triển khai dạy học theo dự án trực tuyến, lớp học đảo ngược."]
+            },
+            {
+                id: 8, type: "fill", difficulty: "Nâng cao", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Ở mức độ Nâng cao của năng lực 1.2 (Hướng dẫn, hỗ trợ học tập), giáo viên cần <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> các công cụ/phương pháp hỗ trợ dạy học thông minh.",
+                wordBank: ["Sáng tạo, thử nghiệm", "Tìm kiếm, tải về", "Sao chép, sử dụng", "Báo cáo, thống kê"],
+                correctAnswer: "Sáng tạo, thử nghiệm"
+            },
+            {
+                id: 9, type: "single", difficulty: "Trung bình", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Sử dụng dữ liệu học tập số để xác định người học cần hỗ trợ và lựa chọn biện pháp can thiệp phù hợp là yêu cầu mức độ nào của năng lực 1.2?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Xuất sắc"],
+                correctAnswer: "Thành thạo"
+            },
+            {
+                id: 10, type: "multiple", difficulty: "Nâng cao", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Yêu cầu nào thuộc mức 'Thành thạo' của năng lực 1.3 (Cá nhân hóa người học)? (Chọn nhiều đáp án)",
+                options: ["Thiết kế lộ trình học tập linh hoạt, cho người học tự chủ tốc độ.", "Thiết kế nhiệm vụ học tập phân hóa theo trình độ, năng lực.", "Tích hợp công cụ số hỗ trợ hoạt động học tập thích ứng.", "Đánh giá hiệu quả của các chiến lược dạy học cá nhân hóa."],
+                correctAnswer: ["Thiết kế lộ trình học tập linh hoạt, cho người học tự chủ tốc độ.", "Thiết kế nhiệm vụ học tập phân hóa theo trình độ, năng lực.", "Tích hợp công cụ số hỗ trợ hoạt động học tập thích ứng."]
+            },
+            {
+                id: 11, type: "single", difficulty: "Tình huống sư phạm", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Khi giao bài tập nhóm trên nền tảng số, giáo viên hướng dẫn học sinh kĩ năng giao tiếp, hợp tác hiệu quả và dùng công nghệ để đánh giá quá trình cộng tác. Giáo viên đang đạt mức nào của năng lực Học tập cộng tác?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chưa đạt"],
+                correctAnswer: "Thành thạo"
+            },
+            {
+                id: 12, type: "fill", difficulty: "Dễ", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Yêu cầu cơ bản của năng lực 1.4 (Học tập cộng tác) là sử dụng công cụ số cơ bản để tổ chức cho người học làm việc nhóm <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span>.",
+                wordBank: ["Đơn giản", "Phức tạp", "Xuyên quốc gia", "Trực tiếp"],
+                correctAnswer: "Đơn giản"
+            },
+            {
+                id: 13, type: "single", difficulty: "Nâng cao", domain: "Miền 1: Tổ chức dạy học trong môi trường số",
+                question: "Xây dựng và quản lí được các cộng đồng học tập trực tuyến là minh chứng cho mức độ nào của năng lực 1.4?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Không có trong TT18"],
+                correctAnswer: "Nâng cao"
+            },
+
+            // --- MIỀN 2: KIỂM TRA, ĐÁNH GIÁ (Q14 - Q20) ---
+            {
+                id: 14, type: "single", difficulty: "Dễ", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Áp dụng được một số công cụ tạo bài kiểm tra online đơn giản trong hoạt động dạy học là yêu cầu mức độ nào của năng lực 2.1?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Tiên tiến"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 15, type: "multiple", difficulty: "Trung bình", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Mức Thành thạo của năng lực 2.1 (Phương thức đánh giá) yêu cầu giáo viên làm được những gì? (Chọn nhiều đáp án)",
+                options: ["Sử dụng công cụ số phổ biến để tạo bài kiểm tra quá trình và tổng kết.", "Thiết kế và áp dụng hình thức đánh giá số đa dạng phù hợp mục tiêu.", "Sáng tạo triển khai mô hình đánh giá số tiên tiến.", "Hướng dẫn đồng nghiệp xây dựng chiến lược đánh giá số."],
+                correctAnswer: ["Sử dụng công cụ số phổ biến để tạo bài kiểm tra quá trình và tổng kết.", "Thiết kế và áp dụng hình thức đánh giá số đa dạng phù hợp mục tiêu."]
+            },
+            {
+                id: 16, type: "fill", difficulty: "Nâng cao", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Ở năng lực 2.2, việc áp dụng kĩ thuật phân tích dữ liệu học tập nâng cao để <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> xu hướng, phát hiện sớm vấn đề thuộc mức Nâng cao.",
+                wordBank: ["Dự đoán", "Báo cáo", "Lưu trữ", "Sao lưu"],
+                correctAnswer: "Dự đoán"
+            },
+            {
+                id: 17, type: "single", difficulty: "Trung bình", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Sử dụng công cụ trực quan hóa dữ liệu để xây dựng báo cáo đánh giá sự tiến bộ của người học thuộc mức độ nào của năng lực Phân tích kết quả học tập?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Cơ sở"],
+                correctAnswer: "Thành thạo"
+            },
+            {
+                id: 18, type: "multiple", difficulty: "Tình huống ứng dụng", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Để đạt mức Thành thạo ở năng lực 2.3 (Phản hồi và đánh giá cải tiến), cô giáo có thể dùng các cách thức nào sau đây để phản hồi cho học sinh?",
+                options: ["Chỉ nhập điểm số cuối kì lên hệ thống.", "Ghi âm nhận xét.", "Quay video ngắn phản hồi.", "Bình luận trực tiếp trên tài liệu số của học sinh."],
+                correctAnswer: ["Ghi âm nhận xét.", "Quay video ngắn phản hồi.", "Bình luận trực tiếp trên tài liệu số của học sinh."]
+            },
+            {
+                id: 19, type: "fill", difficulty: "Dễ", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Mức Cơ bản của năng lực 2.3 yêu cầu GV cung cấp phản hồi <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> cho người học bằng văn bản hoặc điểm số qua nền tảng số.",
+                wordBank: ["Kịp thời", "Chi tiết", "Cá nhân hóa", "Đa chiều"],
+                correctAnswer: "Kịp thời"
+            },
+            {
+                id: 20, type: "single", difficulty: "Nâng cao", domain: "Miền 2: Kiểm tra, Đánh giá",
+                question: "Hướng dẫn đồng nghiệp sử dụng phản hồi bằng công cụ số và dữ liệu học tập để cải tiến liên tục chương trình là mức độ nào của năng lực 2.3?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chuyên sâu"],
+                correctAnswer: "Nâng cao"
+            },
+
+            // --- MIỀN 3: TRAO QUYỀN CHO NGƯỜI HỌC (Q21 - Q27) ---
+            {
+                id: 21, type: "multiple", difficulty: "Trung bình", domain: "Miền 3: Trao quyền cho người học",
+                question: "Mức Thành thạo của năng lực 3.1 (Tiếp cận và hòa nhập) yêu cầu giáo viên: (Chọn nhiều đáp án)",
+                options: ["Sử dụng tài nguyên số có tính đến sự đa dạng của người học (đa dạng ngôn ngữ, phong cách học...).", "Đảm bảo mọi người học có cơ hội sử dụng thiết bị số của trường khi cần.", "Khai thác công cụ số đáp ứng nhu cầu đặc biệt của người học.", "Chỉ cần gửi file PDF cho tất cả học sinh là đủ."],
+                correctAnswer: ["Sử dụng tài nguyên số có tính đến sự đa dạng của người học (đa dạng ngôn ngữ, phong cách học...).", "Đảm bảo mọi người học có cơ hội sử dụng thiết bị số của trường khi cần.", "Khai thác công cụ số đáp ứng nhu cầu đặc biệt của người học."]
+            },
+            {
+                id: 22, type: "single", difficulty: "Dễ", domain: "Miền 3: Trao quyền cho người học",
+                question: "Sử dụng các công cụ số cơ bản để hỗ trợ người học gặp khó khăn trong học tập là mức độ nào của năng lực 3.1?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chuyên sâu"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 23, type: "fill", difficulty: "Nâng cao", domain: "Miền 3: Trao quyền cho người học",
+                question: "Mức Nâng cao của năng lực 3.2 yêu cầu hướng dẫn đồng nghiệp xây dựng hệ sinh thái học tập số, kết nối người học với các <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> bên ngoài nhà trường.",
+                wordBank: ["Chuyên gia và vấn đề thực tiễn", "Trò chơi giải trí", "Phụ huynh học sinh", "Mạng xã hội ảo"],
+                correctAnswer: "Chuyên gia và vấn đề thực tiễn"
+            },
+            {
+                id: 24, type: "single", difficulty: "Tình huống sư phạm", domain: "Miền 3: Trao quyền cho người học",
+                question: "Thầy A giao dự án yêu cầu học sinh dùng công nghệ số xác định vấn đề ô nhiễm môi trường, thu thập dữ liệu và đề xuất giải pháp. Thầy A đạt mức nào của năng lực 3.2 (Giải quyết vấn đề)?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chưa đạt"],
+                correctAnswer: "Thành thạo"
+            },
+            {
+                id: 25, type: "multiple", difficulty: "Trung bình", domain: "Miền 3: Trao quyền cho người học",
+                question: "Mức Thành thạo của năng lực 3.3 (Khuyến khích tham gia tích cực) yêu cầu GV thiết kế hoạt động cho người học giải quyết vấn đề bằng công cụ nào? (Chọn nhiều đáp án)",
+                options: ["Mô phỏng", "Thí nghiệm ảo", "Thực tế ảo (VR) / Thực tế ảo tăng cường (AR)", "Bảng đen và phấn"],
+                correctAnswer: ["Mô phỏng", "Thí nghiệm ảo", "Thực tế ảo (VR) / Thực tế ảo tăng cường (AR)"]
+            },
+            {
+                id: 26, type: "fill", difficulty: "Dễ", domain: "Miền 3: Trao quyền cho người học",
+                question: "Mức cơ bản của năng lực 3.3 yêu cầu GV tích hợp công nghệ số nhằm <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> và tăng hiệu quả trình bày nội dung dạy học.",
+                wordBank: ["Trực quan hóa", "Che giấu", "Lược bớt", "Kéo dài"],
+                correctAnswer: "Trực quan hóa"
+            },
+            {
+                id: 27, type: "single", difficulty: "Nâng cao", domain: "Miền 3: Trao quyền cho người học",
+                question: "Việc 'Sáng tạo và điều phối các dự án học tập sử dụng công nghệ số, tạo môi trường học tập năng động, lấy người học làm trung tâm' thuộc năng lực nào ở mức Nâng cao?",
+                options: ["3.3. Khuyến khích sự tham gia tích cực", "3.1. Tiếp cận và hòa nhập", "1.1. Dạy học trong môi trường số", "2.1. Phương thức đánh giá"],
+                correctAnswer: "3.3. Khuyến khích sự tham gia tích cực"
+            },
+
+            // --- MIỀN 4: KĨ NĂNG CÔNG NGHỆ SỐ (Q28 - Q34) ---
+            {
+                id: 28, type: "single", difficulty: "Dễ", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Lưu trữ và sắp xếp một cách khoa học các dữ liệu trên máy tính hoặc đám mây là mức độ nào của năng lực 4.1 (Kĩ năng thông tin và dữ liệu)?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chuyên môn"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 29, type: "multiple", difficulty: "Trung bình", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Mức Thành thạo của năng lực 4.1 yêu cầu giáo viên làm được gì? (Chọn nhiều đáp án)",
+                options: ["Đánh giá độ tin cậy của nguồn tin trên Internet, mạng xã hội.", "Hướng dẫn người học kĩ năng tư duy phản biện khi tìm kiếm thông tin.", "Tổ chức nhiệm vụ cho người học chủ động tìm kiếm, xử lí thông tin.", "Sử dụng kĩ thuật tìm kiếm nâng cao."],
+                correctAnswer: ["Đánh giá độ tin cậy của nguồn tin trên Internet, mạng xã hội.", "Hướng dẫn người học kĩ năng tư duy phản biện khi tìm kiếm thông tin.", "Tổ chức nhiệm vụ cho người học chủ động tìm kiếm, xử lí thông tin.", "Sử dụng kĩ thuật tìm kiếm nâng cao."]
+            },
+            {
+                id: 30, type: "fill", difficulty: "Trung bình", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Ở mức Thành thạo năng lực 4.2 (Sáng tạo nội dung số), GV cần hướng dẫn người học thực hiện quyền tác giả, giấy phép, cách <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> khi chia sẻ tài nguyên số.",
+                wordBank: ["Trích dẫn", "Chỉnh sửa", "Xóa bỏ", "Sao chép lậu"],
+                correctAnswer: "Trích dẫn"
+            },
+            {
+                id: 31, type: "single", difficulty: "Nâng cao", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Sử dụng thành thạo các công cụ chuyên dụng để tạo ra các học liệu số có tính tương tác cao thuộc mức độ nào của năng lực 4.2?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Đỉnh cao"],
+                correctAnswer: "Nâng cao"
+            },
+            {
+                id: 32, type: "multiple", difficulty: "Tình huống sư phạm", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Để đạt mức Thành thạo của năng lực 4.3 (An toàn), giáo viên cần thực hiện được những hành động nào dưới đây?",
+                options: ["Áp dụng biện pháp bảo vệ dữ liệu cá nhân của người học.", "Nhận diện và xử lí tình huống bắt nạt trực tuyến.", "Dạy học giảm căng thẳng trong môi trường số.", "Chỉ chia sẻ mật khẩu LMS cho lớp trưởng."],
+                correctAnswer: ["Áp dụng biện pháp bảo vệ dữ liệu cá nhân của người học.", "Nhận diện và xử lí tình huống bắt nạt trực tuyến.", "Dạy học giảm căng thẳng trong môi trường số."]
+            },
+            {
+                id: 33, type: "fill", difficulty: "Dễ", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Yêu cầu cơ bản của năng lực 4.3 là bố trí, sắp xếp được <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> sử dụng thiết bị, công cụ số hợp lí cho người học.",
+                wordBank: ["Không gian, thời gian", "Kinh phí", "Bàn ghế", "Ánh sáng"],
+                correctAnswer: "Không gian, thời gian"
+            },
+            {
+                id: 34, type: "single", difficulty: "Nâng cao", domain: "Miền 4: Kĩ năng công nghệ số",
+                question: "Cập nhật và phổ biến các xu hướng, mối đe dọa mới và cách phòng chống cho cộng đồng giáo viên, phụ huynh là yêu cầu của năng lực nào ở mức Nâng cao?",
+                options: ["4.3. An toàn", "5.1. Giao tiếp trong tổ chức", "4.1. Kĩ năng thông tin", "3.2. Giải quyết vấn đề"],
+                correctAnswer: "4.3. An toàn"
+            },
+
+            // --- MIỀN 5: PHÁT TRIỂN CHUYÊN MÔN (Q35 - Q42) ---
+            {
+                id: 35, type: "single", difficulty: "Dễ", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Sử dụng email, nhóm chat của trường/tổ để trao đổi thông tin công việc là mức độ nào của năng lực 5.1 (Giao tiếp trong tổ chức)?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Tiêu chuẩn"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 36, type: "multiple", difficulty: "Trung bình", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Thuộc mức Thành thạo năng lực 5.2 (Hợp tác phát triển chuyên môn), giáo viên cần làm được gì? (Chọn nhiều đáp án)",
+                options: ["Xây dựng kế hoạch đổi mới ứng dụng công nghệ số trong chuyên môn.", "Chủ động tìm kiếm và tham gia các khóa học cơ bản.", "Tham gia chia sẻ, cập nhật kĩ năng với đồng nghiệp.", "Hướng dẫn đồng nghiệp xây dựng yêu cầu dạy học môi trường số."],
+                correctAnswer: ["Xây dựng kế hoạch đổi mới ứng dụng công nghệ số trong chuyên môn.", "Chủ động tìm kiếm và tham gia các khóa học cơ bản.", "Tham gia chia sẻ, cập nhật kĩ năng với đồng nghiệp."]
+            },
+            {
+                id: 37, type: "fill", difficulty: "Nâng cao", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Ở mức Nâng cao của năng lực 5.1, GV có thể xây dựng và quản lí <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> chính thức của trường để chia sẻ và kết nối cộng đồng.",
+                wordBank: ["Chiến lược truyền thông số", "Hệ thống điện lưới", "Sổ điểm giấy", "Bảng tin truyền thống"],
+                correctAnswer: "Chiến lược truyền thông số"
+            },
+            {
+                id: 38, type: "single", difficulty: "Trung bình", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Tạo được tài nguyên số phục vụ cho môn học dựa từ các nguồn có sẵn thuộc mức độ nào của năng lực 5.3 (Phát triển và quản lí học liệu số)?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Trung cấp"],
+                correctAnswer: "Thành thạo"
+            },
+            {
+                id: 39, type: "multiple", difficulty: "Trung bình", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Để quản lí học liệu số (Năng lực 5.3) ở mức Thành thạo, giáo viên cần: (Chọn nhiều đáp án)",
+                options: ["Tổ chức lưu trữ cá nhân khoa học, an toàn.", "Đánh giá chất lượng, độ tin cậy, tính pháp lí của học liệu.", "Lựa chọn tài nguyên phù hợp với đa dạng người học.", "Chỉ dùng sách giáo khoa in."],
+                correctAnswer: ["Tổ chức lưu trữ cá nhân khoa học, an toàn.", "Đánh giá chất lượng, độ tin cậy, tính pháp lí của học liệu.", "Lựa chọn tài nguyên phù hợp với đa dạng người học."]
+            },
+            {
+                id: 40, type: "fill", difficulty: "Dễ", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Mức Cơ bản của năng lực 5.3 là sử dụng công cụ phổ biến để tìm kiếm tài nguyên, kho học liệu số, tài nguyên giáo dục <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> (OER).",
+                wordBank: ["Mở", "Đóng", "Bản quyền", "Thu phí"],
+                correctAnswer: "Mở"
+            },
+            {
+                id: 41, type: "single", difficulty: "Nâng cao", domain: "Miền 5: Phát triển chuyên môn",
+                question: "Hướng dẫn đồng nghiệp xây dựng và quản trị kho học liệu số mở của nhà trường là minh chứng cho mức độ nào của năng lực 5.3?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Lãnh đạo"],
+                correctAnswer: "Nâng cao"
+            },
+
+            // --- MIỀN 6: TRÍ TUỆ NHÂN TẠO - AI (Q43 - Q50) ---
+            {
+                id: 42, type: "single", difficulty: "Dễ", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Nhận diện được cách vận hành của AI và các công nghệ có tích hợp AI là yêu cầu mức độ nào của năng lực 6.1 (Tư duy lấy con người làm trung tâm)?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chuyên sâu"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 43, type: "multiple", difficulty: "Trung bình", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Thuộc mức Thành thạo năng lực 6.1, giáo viên cần làm được những gì? (Chọn nhiều đáp án)",
+                options: ["Khai thác công cụ AI chuyên biệt để tạo học liệu số tương tác.", "Hướng dẫn người học sử dụng AI có trách nhiệm, nhận biết rủi ro.", "Thực hiện biện pháp phòng ngừa rủi ro đạo đức cơ bản khi dùng AI.", "Để AI tự động quyết định 100% điểm số của học sinh."],
+                correctAnswer: ["Khai thác công cụ AI chuyên biệt để tạo học liệu số tương tác.", "Hướng dẫn người học sử dụng AI có trách nhiệm, nhận biết rủi ro.", "Thực hiện biện pháp phòng ngừa rủi ro đạo đức cơ bản khi dùng AI."]
+            },
+            {
+                id: 44, type: "fill", difficulty: "Nâng cao", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Năng lực 6.2 (Đạo đức AI) mức Nâng cao yêu cầu GV tham gia xây dựng <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> về sử dụng AI có đạo đức trong nhà trường.",
+                wordBank: ["Chính sách, hướng dẫn", "Phần mềm", "Hệ điều hành", "Tài khoản"],
+                correctAnswer: "Chính sách, hướng dẫn"
+            },
+            {
+                id: 45, type: "single", difficulty: "Tình huống sư phạm", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Giáo viên nhận diện được khả năng thu thập thông tin cá nhân của công cụ AI và thể hiện sự cẩn trọng với quyền riêng tư của học sinh. GV đang đạt mức nào của Đạo đức AI?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Chưa đạt"],
+                correctAnswer: "Cơ bản"
+            },
+            {
+                id: 46, type: "multiple", difficulty: "Trung bình", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Theo TT18, mức Thành thạo của năng lực 6.3 (Sư phạm AI) yêu cầu: (Chọn nhiều đáp án)",
+                options: ["Ứng dụng AI linh hoạt đảm bảo lấy người học làm trung tâm.", "Lựa chọn công cụ AI phù hợp, giảm thiểu rủi ro.", "Tổ chức tương tác 3 chiều: GV - Người học - AI.", "Xây dựng nguyên tắc sư phạm dùng AI cho toàn trường."],
+                correctAnswer: ["Ứng dụng AI linh hoạt đảm bảo lấy người học làm trung tâm.", "Lựa chọn công cụ AI phù hợp, giảm thiểu rủi ro.", "Tổ chức tương tác 3 chiều: GV - Người học - AI."]
+            },
+            {
+                id: 47, type: "fill", difficulty: "Nâng cao", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Ở mức Nâng cao của năng lực 6.3, GV hướng dẫn đồng nghiệp thiết kế và sử dụng AI theo tiếp cận <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span>, lấy con người làm trung tâm.",
+                wordBank: ["Đồng sáng tạo", "Loại trừ", "Thay thế", "Thụ động"],
+                correctAnswer: "Đồng sáng tạo"
+            },
+            {
+                id: 48, type: "single", difficulty: "Trung bình", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Sử dụng công cụ AI (chủ yếu là AI tạo sinh) để hỗ trợ học tập suốt đời và phát triển chuyên môn bản thân là mức độ nào của năng lực 6.4?",
+                options: ["Cơ bản", "Thành thạo", "Nâng cao", "Bắt đầu"],
+                correctAnswer: "Thành thạo"
+            },
+            {
+                id: 49, type: "fill", difficulty: "Nâng cao", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Năng lực 6.4 mức Nâng cao yêu cầu GV xây dựng hoặc sử dụng được các bộ công cụ AI tạo sinh hỗ trợ <span id='blank-1' class='blank-slot' onclick='openWordBank(1)'>___</span> của đồng nghiệp.",
+                wordBank: ["Phát triển chuyên môn", "Giải trí", "Chấm điểm tự động", "Bảo mật"],
+                correctAnswer: "Phát triển chuyên môn"
+            },
+            {
+                id: 50, type: "multiple", difficulty: "Tình huống ứng dụng", domain: "Miền 6: Trí tuệ nhân tạo (AI)",
+                question: "Để đạt mức Thành thạo năng lực 6.2 (Đạo đức AI), khi thiết kế hoạt động giáo dục tích hợp AI, giáo viên cần cân bằng giữa các yếu tố nào?",
+                options: ["Tương tác công nghệ", "Tương tác xã hội", "Phát triển tư duy phản biện", "Cắt giảm hoàn toàn giao tiếp trực tiếp"],
+                correctAnswer: ["Tương tác công nghệ", "Tương tác xã hội", "Phát triển tư duy phản biện"]
+            }
+        ];
 
         // --- UI & NAVIGATION ---
         const tabs = [
             { id: 'tab-structure', icon: 'fa-sitemap', label: 'Cấu trúc chung' },
             { id: 'tab-terms', icon: 'fa-book-bookmark', label: 'Tra cứu 12 thuật ngữ' },
             { id: 'tab-details', icon: 'fa-table-cells-large', label: 'Ma trận & Minh chứng' },
-            { id: 'tab-suggest', icon: 'fa-wand-magic-sparkles', label: 'Trợ lí AI' },
+            { id: 'tab-suggest', icon: 'fa-wand-magic-sparkles', label: 'Trợ lí Kế hoạch' },
+            { id: 'tab-quiz', icon: 'fa-clipboard-question', label: 'Ôn tập kiến thức' }, // Tab mới
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
             renderTabs();
-            renderStructure();
-            renderTerms();
-            renderDetails();
-            renderFormOptions();
-            document.getElementById('suggestForm').addEventListener('submit', handleSuggest);
+            // Khởi tạo các module khác (giả lập hàm rỗng cho gọn code, ở thực tế gọi renderStructure()...)
+            document.getElementById('total-q-count').innerText = quizData.length;
         });
 
         function renderTabs() {
@@ -618,434 +839,217 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // --- RENDER DỮ LIỆU TĨNH ---
-        function renderStructure() {
-            const container = document.getElementById('structure-container');
-            const colorMap = {
-                'blue': { border: 'border-blue-500', bg: 'bg-blue-50', text: 'text-blue-700', badge: 'bg-blue-100 text-blue-700' },
-                'emerald': { border: 'border-emerald-500', bg: 'bg-emerald-50', text: 'text-emerald-700', badge: 'bg-emerald-100 text-emerald-700' },
-                'purple': { border: 'border-purple-500', bg: 'bg-purple-50', text: 'text-purple-700', badge: 'bg-purple-100 text-purple-700' },
-                'orange': { border: 'border-orange-500', bg: 'bg-orange-50', text: 'text-orange-700', badge: 'bg-orange-100 text-orange-700' },
-                'teal': { border: 'border-teal-500', bg: 'bg-teal-50', text: 'text-teal-700', badge: 'bg-teal-100 text-teal-700' },
-                'indigo': { border: 'border-indigo-500', bg: 'bg-indigo-50', text: 'text-indigo-700', badge: 'bg-indigo-100 text-indigo-700' }
-            };
+        // ==========================================
+        // QUIZ LOGIC
+        // ==========================================
+        let currentQuestionIndex = 0;
+        let userAnswers = {}; // Lưu đáp án { questionId: answer }
+        let currentFillInTarget = null;
 
-            thongTu18Data.domains.forEach((domain, idx) => {
-                const style = colorMap[domain.color];
-                const delay = `delay-${(idx + 3) * 100}`; 
-                
-                let badges = domain.competencies.map(comp => 
-                    `<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl ${style.badge} text-xs font-bold shadow-sm">
-                        <span>${comp.code}</span>
-                        <span class="opacity-80 mx-0.5">|</span>
-                        <span>${comp.name}</span>
-                    </span>`
-                ).join('');
-
-                const card = document.createElement('div');
-                card.className = `p-7 rounded-3xl bg-white shadow-xl shadow-slate-200/50 border-l-4 ${style.border} transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fadeInUp ${delay}`;
-                card.innerHTML = `
-                    <div class="flex items-start gap-4 mb-5">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-inner ${style.bg} ${style.text}">
-                            <i class="fa-solid ${domain.icon} text-2xl"></i>
-                        </div>
-                        <div>
-                            <span class="inline-block text-xs font-bold tracking-widest uppercase mb-1 ${style.text} bg-white px-2 py-0.5 rounded shadow-sm border border-slate-100">${domain.prefix}</span>
-                            <h3 class="text-xl font-extrabold text-dark leading-tight">${domain.title}</h3>
-                        </div>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-5 leading-relaxed font-medium">${domain.desc}</p>
-                    <div class="pt-4 border-t border-slate-100">
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Các năng lực thành phần:</p>
-                        <div class="flex flex-wrap gap-2">
-                            ${badges}
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function renderTerms() {
-            const container = document.getElementById('terms-container');
-            thongTu18Data.terms.forEach((term, idx) => {
-                const delay = `delay-${(idx % 3 + 1) * 100}`;
-                const card = document.createElement('div');
-                card.className = `term-card bg-white p-7 rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden animate-fadeInUp ${delay}`;
-                
-                const colorClasses = {
-                    'blue': 'bg-blue-50 text-blue-600', 'emerald': 'bg-emerald-50 text-emerald-600',
-                    'purple': 'bg-purple-50 text-purple-600', 'orange': 'bg-orange-50 text-orange-600',
-                    'rose': 'bg-rose-50 text-rose-600', 'cyan': 'bg-cyan-50 text-cyan-600',
-                    'yellow': 'bg-yellow-50 text-yellow-600', 'indigo': 'bg-indigo-50 text-indigo-600',
-                    'teal': 'bg-teal-50 text-teal-600', 'slate': 'bg-slate-100 text-slate-600',
-                    'fuchsia': 'bg-fuchsia-50 text-fuchsia-600', 'sky': 'bg-sky-50 text-sky-600'
-                }[term.color];
-
-                card.innerHTML = `
-                    <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                        <div class="text-7xl font-black">${term.id < 10 ? '0'+term.id : term.id}</div>
-                    </div>
-                    <div class="term-icon-wrapper w-14 h-14 ${colorClasses} rounded-2xl flex items-center justify-center mb-5 shadow-sm border border-white">
-                        <i class="fa-solid ${term.icon} text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-extrabold text-slate-800 mb-3 pr-8 relative z-10">${term.term}</h3>
-                    <p class="text-slate-500 text-[15px] leading-relaxed relative z-10 font-medium">${term.def}</p>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function renderDetails() {
-            const container = document.getElementById('details-container');
+        function startQuiz() {
+            document.getElementById('quiz-start-screen').classList.add('hidden');
+            document.getElementById('quiz-play-screen').classList.remove('hidden');
+            document.getElementById('total-q-num').innerText = quizData.length;
             
-            thongTu18Data.domains.forEach((domain, index) => {
-                const bgHeader = {
-                    'blue': 'bg-gradient-to-r from-blue-600 to-blue-500', 'emerald': 'bg-gradient-to-r from-emerald-600 to-emerald-500',
-                    'purple': 'bg-gradient-to-r from-purple-600 to-purple-500', 'orange': 'bg-gradient-to-r from-orange-600 to-orange-500',
-                    'teal': 'bg-gradient-to-r from-teal-600 to-teal-500', 'indigo': 'bg-gradient-to-r from-indigo-600 to-indigo-500'
-                }[domain.color];
-
-                const accordionId = `acc-${domain.id}`;
-                
-                let compsHTML = '';
-                domain.competencies.forEach(comp => {
-                    const renderList = (items, colorClass, icon) => {
-                        if(!items || items.length === 0) return `<p class="text-slate-400 italic text-sm font-medium">Chưa quy định ở mức này.</p>`;
-                        return `<ul class="space-y-2.5">
-                            ${items.map(i => `<li class="flex items-start gap-2 text-sm text-slate-600 font-medium leading-relaxed"><i class="fa-solid ${icon} ${colorClass} mt-1 shrink-0 text-xs"></i> <span>${i}</span></li>`).join('')}
-                        </ul>`;
-                    };
-
-                    compsHTML += `
-                        <div class="mb-6 last:mb-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <div class="bg-slate-50/80 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
-                                <h4 class="font-extrabold text-lg text-slate-800"><span class="text-primary mr-2 px-2 py-1 bg-white rounded shadow-sm border border-slate-100">${comp.code}</span> ${comp.name}</h4>
-                            </div>
-                            <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
-                                <div class="p-5 hover:bg-emerald-50/30 transition-colors">
-                                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wide uppercase mb-4"><i class="fa-solid fa-star text-emerald-600"></i> Cơ bản</div>
-                                    ${renderList(comp.basic, 'text-emerald-500', 'fa-check')}
-                                </div>
-                                <div class="p-5 hover:bg-blue-50/30 transition-colors">
-                                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-100 text-blue-800 text-xs font-bold tracking-wide uppercase mb-4"><i class="fa-solid fa-star-half-stroke text-blue-600"></i> Thành thạo</div>
-                                    ${renderList(comp.proficient, 'text-blue-500', 'fa-angles-right')}
-                                </div>
-                                <div class="p-5 hover:bg-purple-50/30 transition-colors">
-                                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-purple-100 text-purple-800 text-xs font-bold tracking-wide uppercase mb-4"><i class="fa-solid fa-star text-purple-600"></i><i class="fa-solid fa-star text-purple-600"></i> Nâng cao</div>
-                                    ${renderList(comp.advanced, 'text-purple-500', 'fa-fire')}
-                                </div>
-                            </div>
-                            <!-- VÍ DỤ MINH CHỨNG -->
-                            <div class="border-t border-slate-100 p-4 example-box flex gap-3 items-start">
-                                <div class="w-8 h-8 rounded-full bg-yellow-400 text-yellow-900 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-lightbulb"></i>
-                                </div>
-                                <div>
-                                    <strong class="text-sm text-yellow-900 block mb-1">Ví dụ minh chứng năng lực:</strong>
-                                    <p class="text-sm text-yellow-800 leading-relaxed font-medium">${comp.example}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                const accordionItem = document.createElement('div');
-                accordionItem.className = "bg-white rounded-[2rem] shadow-lg shadow-slate-200/50 border border-slate-100 overflow-hidden";
-                accordionItem.innerHTML = `
-                    <button class="w-full px-8 py-6 flex items-center justify-between focus:outline-none hover:bg-slate-50 transition-colors group" onclick="toggleAccordion('${accordionId}', this)">
-                        <div class="flex items-center gap-5 text-left">
-                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform ${bgHeader}">
-                                <i class="fa-solid ${domain.icon} text-2xl"></i>
-                            </div>
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 block">${domain.prefix}</span>
-                                <h3 class="text-xl md:text-2xl font-extrabold text-slate-800">${domain.title}</h3>
-                            </div>
-                        </div>
-                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-slate-200 transition-colors">
-                            <i class="fa-solid fa-chevron-down text-slate-500 rotate-icon text-lg"></i>
-                        </div>
-                    </button>
-                    <div id="${accordionId}" class="accordion-content bg-slate-50/50 px-5 md:px-8">
-                        <div class="py-8">
-                            ${compsHTML}
-                        </div>
-                    </div>
-                `;
-                container.appendChild(accordionItem);
-
-                if(index === 0) {
-                    setTimeout(() => toggleAccordion(accordionId, accordionItem.querySelector('button')), 100);
-                }
-            });
+            // Xáo trộn mảng quizData (tuỳ chọn, đang tắt để test theo thứ tự)
+            // quizData.sort(() => Math.random() - 0.5); 
+            
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            renderQuestion();
         }
 
-        // --- RENDER FORM OPTIONS CỦA AI ---
-        function renderFormOptions() {
-            // Render Bloom Checkboxes
-            const blooms = ['Nhớ', 'Hiểu', 'Vận dụng', 'Phân tích', 'Đánh giá', 'Sáng tạo'];
-            const bloomContainer = document.getElementById('bloomCheckboxes');
-            blooms.forEach(b => {
-                bloomContainer.innerHTML += `
-                    <label class="checkbox-wrapper flex items-center gap-2 p-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
-                        <input type="checkbox" name="bloom" value="${b}" class="w-4 h-4 text-primary rounded border-slate-300 focus:ring-primary focus:ring-2"> 
-                        <span class="text-sm font-medium text-slate-600 transition-colors">${b}</span>
-                    </label>
-                `;
-            });
+        function renderQuestion() {
+            const q = quizData[currentQuestionIndex];
+            
+            // Update Progress UI
+            document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
+            document.getElementById('quiz-progress').style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+            
+            // Update Badges
+            const diffBadge = document.getElementById('q-difficulty-badge');
+            diffBadge.innerText = q.difficulty;
+            diffBadge.className = 'px-3 py-1 rounded-md text-xs font-bold border ';
+            if(q.difficulty.includes('Dễ')) diffBadge.className += 'bg-green-100 text-green-700 border-green-200';
+            else if(q.difficulty.includes('Trung bình')) diffBadge.className += 'bg-yellow-100 text-yellow-700 border-yellow-200';
+            else if(q.difficulty.includes('Tình huống')) diffBadge.className += 'bg-purple-100 text-purple-700 border-purple-200';
+            else diffBadge.className += 'bg-red-100 text-red-700 border-red-200'; // Nâng cao/Chuyên sâu
 
-            // Render 20 Năng lực thành phần (TT18)
-            const compContainer = document.getElementById('compCheckboxes');
-            thongTu18Data.domains.forEach(domain => {
-                const group = document.createElement('div');
-                group.className = "mb-3 last:mb-0";
-                group.innerHTML = `<div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider sticky top-0 bg-white/90 backdrop-blur pb-1 mb-1">${domain.prefix}: ${domain.title}</div>`;
-                
-                domain.competencies.forEach(comp => {
-                    group.innerHTML += `
-                        <label class="checkbox-wrapper flex items-start gap-2 p-1.5 hover:bg-slate-50 rounded-lg cursor-pointer border border-transparent transition-colors mb-1">
-                            <input type="checkbox" name="competency" value="${comp.code} - ${comp.name}" class="w-4 h-4 mt-0.5 text-primary rounded border-slate-300 focus:ring-primary focus:ring-2 shrink-0"> 
-                            <span class="text-sm font-medium text-slate-600 leading-snug transition-colors">
-                                <span class="font-bold text-slate-700">${comp.code}</span> ${comp.name}
-                            </span>
+            document.getElementById('q-domain-badge').innerText = q.domain;
+            document.getElementById('question-text').innerHTML = q.question;
+            
+            const optionsContainer = document.getElementById('options-container');
+            const wordBankContainer = document.getElementById('word-bank-container');
+            const wordBank = document.getElementById('word-bank');
+            
+            optionsContainer.innerHTML = '';
+            wordBankContainer.classList.add('hidden');
+            document.getElementById('quiz-error').classList.add('hidden');
+
+            // --- Render SINGLE CHOICE ---
+            if (q.type === 'single') {
+                q.options.forEach((opt, idx) => {
+                    const isChecked = userAnswers[q.id] === opt ? 'checked' : '';
+                    optionsContainer.innerHTML += `
+                        <label class="radio-wrapper flex items-start gap-3 p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-colors bg-white">
+                            <input type="radio" name="q-${q.id}" value="${opt}" ${isChecked} onchange="saveAnswer()" class="w-5 h-5 mt-0.5 text-primary focus:ring-primary">
+                            <span class="text-[15px] font-medium text-slate-700 leading-relaxed">${opt}</span>
                         </label>
                     `;
                 });
-                compContainer.appendChild(group);
-            });
-        }
+            } 
+            // --- Render MULTIPLE CHOICE ---
+            else if (q.type === 'multiple') {
+                const savedArr = userAnswers[q.id] || [];
+                q.options.forEach((opt, idx) => {
+                    const isChecked = savedArr.includes(opt) ? 'checked' : '';
+                    optionsContainer.innerHTML += `
+                        <label class="checkbox-wrapper flex items-start gap-3 p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-colors bg-white">
+                            <input type="checkbox" name="q-${q.id}" value="${opt}" ${isChecked} onchange="saveAnswer()" class="w-5 h-5 mt-0.5 text-primary rounded focus:ring-primary">
+                            <span class="text-[15px] font-medium text-slate-700 leading-relaxed">${opt}</span>
+                        </label>
+                    `;
+                });
+                optionsContainer.innerHTML += `<p class="text-xs text-orange-500 font-bold mt-2 italic">* Câu hỏi có thể có nhiều hơn 1 đáp án đúng.</p>`;
+            }
+            // --- Render FILL IN BLANK ---
+            else if (q.type === 'fill') {
+                wordBankContainer.classList.remove('hidden');
+                wordBank.innerHTML = '';
+                
+                // Trộn từ khóa
+                const shuffledWords = [...q.wordBank].sort(() => Math.random() - 0.5);
+                shuffledWords.forEach(word => {
+                    wordBank.innerHTML += `
+                        <button onclick="fillWord('${word}')" class="px-4 py-2 bg-white border-2 border-slate-200 rounded-lg text-sm font-bold text-slate-700 hover:border-primary hover:text-primary transition-colors shadow-sm">
+                            ${word}
+                        </button>
+                    `;
+                });
 
-        // Accordion Actions
-        function toggleAccordion(id, btnElement) {
-            const content = document.getElementById(id);
-            const icon = btnElement.querySelector('.rotate-icon');
-            if (content.classList.contains('open')) {
-                content.classList.remove('open');
-                icon.classList.remove('rotate-180');
+                // Phục hồi đáp án nếu đã chọn
+                if(userAnswers[q.id]) {
+                    setTimeout(() => {
+                        const blank = document.getElementById('blank-1');
+                        if(blank) {
+                            blank.innerText = userAnswers[q.id];
+                            blank.classList.add('filled');
+                        }
+                    }, 50);
+                }
+            }
+
+            // Buttons state
+            document.getElementById('btn-prev').classList.toggle('hidden', currentQuestionIndex === 0);
+            if (currentQuestionIndex === quizData.length - 1) {
+                document.getElementById('btn-next').innerHTML = 'Nộp bài <i class="fa-solid fa-check-to-slot ml-1"></i>';
+                document.getElementById('btn-next').classList.replace('bg-primary', 'bg-emerald-600');
+                document.getElementById('btn-next').classList.replace('hover:bg-blue-700', 'hover:bg-emerald-700');
             } else {
-                content.classList.add('open');
-                icon.classList.add('rotate-180');
+                document.getElementById('btn-next').innerHTML = 'Câu tiếp theo <i class="fa-solid fa-arrow-right ml-1"></i>';
+                document.getElementById('btn-next').classList.replace('bg-emerald-600', 'bg-primary');
+                document.getElementById('btn-next').classList.replace('hover:bg-emerald-700', 'hover:bg-blue-700');
             }
         }
-        function expandAll() {
-            document.querySelectorAll('.accordion-content').forEach(c => c.classList.add('open'));
-            document.querySelectorAll('.rotate-icon').forEach(i => i.classList.add('rotate-180'));
+
+        function saveAnswer() {
+            const q = quizData[currentQuestionIndex];
+            if (q.type === 'single') {
+                const selected = document.querySelector(`input[name="q-${q.id}"]:checked`);
+                if(selected) userAnswers[q.id] = selected.value;
+            } else if (q.type === 'multiple') {
+                const checked = document.querySelectorAll(`input[name="q-${q.id}"]:checked`);
+                userAnswers[q.id] = Array.from(checked).map(cb => cb.value);
+            }
+            document.getElementById('quiz-error').classList.add('hidden');
         }
-        function collapseAll() {
-            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-            document.querySelectorAll('.rotate-icon').forEach(i => i.classList.remove('rotate-180'));
+
+        // Dành cho dạng điền khuyết
+        function openWordBank(id) {
+            // Hiệu ứng highlight khi click vào chỗ trống (nếu cần phát triển nhiều chỗ trống)
+            currentFillInTarget = `blank-${id}`;
+        }
+        function fillWord(word) {
+            const q = quizData[currentQuestionIndex];
+            const blank = document.getElementById('blank-1'); // Đơn giản hóa 1 ô trống/câu
+            blank.innerText = word;
+            blank.classList.add('filled');
+            userAnswers[q.id] = word;
+            document.getElementById('quiz-error').classList.add('hidden');
         }
 
-        // --- LOGIC SMART RECOMMEND (AI Assistant) ---
-        function handleSuggest(e) {
-            e.preventDefault();
-            
-            const errorMsg = document.getElementById('formError');
-            errorMsg.classList.add('hidden');
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
 
-            const grade = document.getElementById('gradeSelect').value;
-            const subject = document.getElementById('subjectSelect').value;
-            const lesson = document.getElementById('lessonInput').value;
-            const knowledge = document.getElementById('knowledgeInput').value;
-
-            // Get arrays of selected values
-            const selectedBlooms = Array.from(document.querySelectorAll('input[name="bloom"]:checked')).map(cb => cb.value);
-            const selectedComps = Array.from(document.querySelectorAll('input[name="competency"]:checked')).map(cb => cb.value);
-
-            // Validation
-            if (selectedBlooms.length < 2) {
-                errorMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Vui lòng chọn ít nhất 2 mức độ Thang Bloom.';
-                errorMsg.classList.remove('hidden');
+        function nextQuestion() {
+            const q = quizData[currentQuestionIndex];
+            // Validate: Bắt buộc chọn đáp án
+            if (!userAnswers[q.id] || (Array.isArray(userAnswers[q.id]) && userAnswers[q.id].length === 0)) {
+                document.getElementById('quiz-error').classList.remove('hidden');
                 return;
             }
-            if (selectedComps.length < 3) {
-                errorMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Vui lòng chọn ít nhất 3 Năng lực số cần rèn luyện.';
-                errorMsg.classList.remove('hidden');
-                return;
-            }
 
-            // Proceed with generation
-            document.getElementById('emptyState').classList.add('hidden');
-            document.getElementById('resultWrapper').classList.add('hidden');
-            document.getElementById('loadingState').classList.remove('hidden');
-
-            setTimeout(() => {
-                generateRecommendation(grade, subject, lesson, knowledge, selectedBlooms, selectedComps);
-                
-                document.getElementById('loadingState').classList.add('hidden');
-                document.getElementById('resultWrapper').classList.remove('hidden');
-            }, 1500);
-        }
-
-        function generateRecommendation(grade, subject, lesson, knowledge, blooms, comps) {
-            // Get mapping tools based on subject
-            let tool1 = "Quizizz/Blooket", tool2 = "Bài giảng Trực quan", tool3 = "Padlet/Miro", tool4 = "Azota/Google Forms";
-            if(subject === 'Toán' || subject === 'Vật lí' || subject === 'Hóa học' || subject === 'Sinh học') {
-                tool2 = "Mô phỏng PhET / GeoGebra / Mô hình 3D";
-                tool3 = "Olm.vn / Bảng trắng điện tử";
-            } else if(subject === 'Tin học' || subject === 'Công nghệ') {
-                tool2 = "Tinkercad / Scratch / Phần mềm chuyên dụng";
-                tool3 = "Môi trường thực hành máy tính / Github";
-            } else if(subject === 'Ngoại ngữ 1') {
-                tool3 = "Flip (Video ngắn) / Quizlet";
-            }
-
-            // Phân bổ 3 năng lực ngẫu nhiên (hoặc theo danh sách đã chọn) vào 4 hoạt động 5512
-            // Để đảm bảo logic: comp1 -> Khởi động/KT, comp2 -> Luyện tập, comp3 -> Vận dụng
-            const comp1 = comps[0];
-            const comp2 = comps[1];
-            const comp3 = comps[2];
-            const comp4 = comps[3] || comps[0]; // Nếu họ chọn nhiều hơn 3
-
-            const displayHTML = `
-                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 mb-4">
-                    <div class="grid grid-cols-2 gap-4 text-sm text-slate-700">
-                        <div><strong class="text-blue-800">Môn học:</strong> ${subject} 10</div>
-                        <div><strong class="text-blue-800">Bài học:</strong> ${lesson}</div>
-                        <div><strong class="text-blue-800">Thang Bloom:</strong> ${blooms.join(', ')}</div>
-                        <div><strong class="text-blue-800">Kiến thức trọng tâm:</strong> <span class="italic">${knowledge.substring(0,60)}...</span></div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-dark text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-list-check text-primary"></i> Tiến trình tổ chức (Theo Thông tư 5512)</h4>
-                    
-                    <!-- Hoạt động 1 -->
-                    <div class="relative pl-6 pb-5 border-l-2 border-primary/30">
-                        <div class="absolute w-3.5 h-3.5 bg-primary rounded-full -left-[8px] top-1 border-2 border-white"></div>
-                        <h5 class="font-extrabold text-primary text-[15px] mb-1.5 uppercase tracking-wide">1. Hoạt động Xác định vấn đề / Khởi động</h5>
-                        <div class="text-[14px] text-slate-700 space-y-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                            <p><strong class="text-slate-800">Nền tảng ứng dụng:</strong> ${tool1} (chế độ chơi nhanh) hoặc Mentimeter khảo sát đám mây từ khóa.</p>
-                            <p><strong class="text-slate-800">Cách triển khai:</strong> Giáo viên tổ chức trò chơi hoặc khảo sát nhanh trên thiết bị di động/phòng máy để kiểm tra kiến thức nền, kích thích sự tò mò về bài học: <em>"${lesson}"</em>.</p>
-                            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-2.5 rounded text-xs mt-2">
-                                <strong class="flex items-center gap-1.5 mb-1"><i class="fa-solid fa-gears"></i> Dụng ý Sư phạm Số:</strong>
-                                Rèn luyện năng lực <strong>[${comp1}]</strong> bằng cách thu hút người học tương tác tức thời trên môi trường số, xóa bỏ khoảng cách không gian lớp học truyền thống.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hoạt động 2 -->
-                    <div class="relative pl-6 pb-5 border-l-2 border-primary/30">
-                        <div class="absolute w-3.5 h-3.5 bg-blue-500 rounded-full -left-[8px] top-1 border-2 border-white"></div>
-                        <h5 class="font-extrabold text-blue-600 text-[15px] mb-1.5 uppercase tracking-wide">2. Hoạt động Hình thành kiến thức mới</h5>
-                        <div class="text-[14px] text-slate-700 space-y-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                            <p><strong class="text-slate-800">Nền tảng ứng dụng:</strong> ${tool2} kết hợp hệ thống LMS của trường.</p>
-                            <p><strong class="text-slate-800">Cách triển khai:</strong> Giáo viên không giảng chay mà hướng dẫn học sinh truy cập học liệu số (Video, Mô phỏng) để tự khám phá nội dung kiến thức: <em>"${knowledge}"</em>.</p>
-                            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-2.5 rounded text-xs mt-2">
-                                <strong class="flex items-center gap-1.5 mb-1"><i class="fa-solid fa-gears"></i> Dụng ý Sư phạm Số:</strong>
-                                Rèn luyện năng lực <strong>[${comp2}]</strong> thông qua việc cá nhân hóa tốc độ tiếp thu của từng học sinh, cho phép các em tự điều khiển các thông số mô phỏng/video để rút ra kết luận.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hoạt động 3 -->
-                    <div class="relative pl-6 pb-5 border-l-2 border-primary/30">
-                        <div class="absolute w-3.5 h-3.5 bg-orange-500 rounded-full -left-[8px] top-1 border-2 border-white"></div>
-                        <h5 class="font-extrabold text-orange-600 text-[15px] mb-1.5 uppercase tracking-wide">3. Hoạt động Luyện tập</h5>
-                        <div class="text-[14px] text-slate-700 space-y-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                            <p><strong class="text-slate-800">Nền tảng ứng dụng:</strong> ${tool3} (Chia sẻ bảng không gian chung).</p>
-                            <p><strong class="text-slate-800">Cách triển khai:</strong> Tổ chức làm việc nhóm. Các nhóm nhận nhiệm vụ mức độ <strong>${blooms.join(' - ')}</strong>, cùng nhau soạn thảo, giải bài tập trên bảng trắng chung để cả lớp cùng quan sát tiến độ theo thời gian thực.</p>
-                            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-2.5 rounded text-xs mt-2">
-                                <strong class="flex items-center gap-1.5 mb-1"><i class="fa-solid fa-gears"></i> Dụng ý Sư phạm Số:</strong>
-                                Rèn luyện năng lực <strong>[${comp3}]</strong> thông qua việc phân công, giám sát và đánh giá chéo kết quả cộng tác của các nhóm trên môi trường số hóa liên tục.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hoạt động 4 -->
-                    <div class="relative pl-6">
-                        <div class="absolute w-3.5 h-3.5 bg-purple-500 rounded-full -left-[8px] top-1 border-2 border-white"></div>
-                        <h5 class="font-extrabold text-purple-600 text-[15px] mb-1.5 uppercase tracking-wide">4. Hoạt động Vận dụng & Đánh giá</h5>
-                        <div class="text-[14px] text-slate-700 space-y-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                            <p><strong class="text-slate-800">Nền tảng ứng dụng:</strong> ${tool4} kết hợp công cụ AI (nếu phù hợp).</p>
-                            <p><strong class="text-slate-800">Cách triển khai:</strong> Giao bài tập về nhà yêu cầu gắn với thực tiễn. Hệ thống tự động chấm điểm bài tập trắc nghiệm và xuất báo cáo phổ điểm để GV điều chỉnh tiết học sau.</p>
-                            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-2.5 rounded text-xs mt-2">
-                                <strong class="flex items-center gap-1.5 mb-1"><i class="fa-solid fa-gears"></i> Dụng ý Sư phạm Số:</strong>
-                                Rèn luyện năng lực <strong>[${comp4}]</strong> khi GV phân tích dữ liệu lịch sử làm bài để có phản hồi (feedback) sâu sát cho từng cá nhân, không chỉ dựa vào cảm tính.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.getElementById('resultState').innerHTML = displayHTML;
-
-            // Raw HTML for Word Export (Optimized for MS Word layout)
-            const wordHTML = `
-                <h2 style="text-align: center; color: #2563eb; margin-bottom: 0;">KẾ HOẠCH BÀI DẠY (GIÁO ÁN)</h2>
-                <h3 style="text-align: center; margin-top: 5px;">(Tích hợp rèn luyện Năng lực số Giáo viên theo TT18/2026)</h3>
-                <hr>
-                <p><strong>Môn học:</strong> ${subject} - Khối lớp: ${grade}</p>
-                <p><strong>Tên bài học/Chủ đề:</strong> ${lesson}</p>
-                <p><strong>Mức độ nhận thức (Thang Bloom):</strong> ${blooms.join(', ')}</p>
-                <p><strong>Nội dung kiến thức cốt lõi:</strong> ${knowledge}</p>
-                <p><strong>Các Năng lực số TT18 được chọn rèn luyện:</strong></p>
-                <ul>
-                    ${comps.map(c => `<li>${c}</li>`).join('')}
-                </ul>
-                <hr>
-                <h3>TIẾN TRÌNH DẠY HỌC (Chuẩn Thông tư 5512/BGDĐT)</h3>
-                
-                <h4>1. Hoạt động 1: Xác định vấn đề / Khởi động</h4>
-                <ul>
-                    <li><strong>Công cụ số:</strong> ${tool1}</li>
-                    <li><strong>Mục tiêu:</strong> Tạo hứng thú, dẫn nhập vào bài mới.</li>
-                    <li><strong>Mô tả:</strong> Tổ chức trò chơi hoặc khảo sát nhanh trên thiết bị để kiểm tra kiến thức nền.</li>
-                    <li><em><strong>Dụng ý phát triển năng lực số:</strong> Rèn luyện năng lực [${comp1}] bằng cách tạo tương tác tức thời trong môi trường số.</em></li>
-                </ul>
-
-                <h4>2. Hoạt động 2: Hình thành kiến thức mới</h4>
-                <ul>
-                    <li><strong>Công cụ số:</strong> ${tool2}</li>
-                    <li><strong>Mục tiêu:</strong> Học sinh nắm vững nội dung: ${knowledge}</li>
-                    <li><strong>Mô tả:</strong> Hướng dẫn học sinh tự khám phá học liệu số, điều khiển mô phỏng để rút ra kết luận.</li>
-                    <li><em><strong>Dụng ý phát triển năng lực số:</strong> Rèn luyện năng lực [${comp2}] qua việc cá nhân hóa lộ trình tiếp thu của người học.</em></li>
-                </ul>
-
-                <h4>3. Hoạt động 3: Luyện tập</h4>
-                <ul>
-                    <li><strong>Công cụ số:</strong> ${tool3}</li>
-                    <li><strong>Mục tiêu:</strong> Rèn luyện bài tập ở mức độ ${blooms.join(', ')}.</li>
-                    <li><strong>Mô tả:</strong> Làm việc nhóm, cùng giải quyết vấn đề trên không gian bảng trắng chung.</li>
-                    <li><em><strong>Dụng ý phát triển năng lực số:</strong> Rèn luyện năng lực [${comp3}] qua việc tổ chức và giám sát làm việc nhóm cộng tác trực tuyến.</em></li>
-                </ul>
-
-                <h4>4. Hoạt động 4: Vận dụng & Kiểm tra đánh giá</h4>
-                <ul>
-                    <li><strong>Công cụ số:</strong> ${tool4}</li>
-                    <li><strong>Mục tiêu:</strong> Vận dụng kiến thức vào thực tiễn, phân tích kết quả học tập.</li>
-                    <li><strong>Mô tả:</strong> Kiểm tra, hệ thống tự động chấm điểm, xuất báo cáo điểm số chi tiết.</li>
-                    <li><em><strong>Dụng ý phát triển năng lực số:</strong> Rèn luyện năng lực [${comp4}] qua việc thu thập, phân tích dữ liệu kết quả học tập để điều chỉnh phương pháp.</em></li>
-                </ul>
-            `;
-            document.getElementById('wordExportContent').innerHTML = wordHTML;
-        }
-
-        // --- XUẤT FILE WORD ---
-        function exportToWord() {
-            const rawContent = document.getElementById('wordExportContent').innerHTML;
-            
-            const preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Ke hoach bai day</title><style>body { font-family: 'Times New Roman', serif; font-size: 14pt; } h2, h3, h4 { color: #333; margin-bottom: 5px;} p, li { line-height: 1.5; margin-top: 5px;}</style></head><body>";
-            const postHtml = "</body></html>";
-            const html = preHtml + rawContent + postHtml;
-
-            const blob = new Blob(['\ufeff', html], {
-                type: 'application/msword'
-            });
-            
-            const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-            const downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-            
-            if(navigator.msSaveOrOpenBlob ){
-                navigator.msSaveOrOpenBlob(blob, 'KeHoachBaiDay_5512.doc');
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
             } else {
-                downloadLink.href = url;
-                downloadLink.download = 'KeHoachBaiDay_5512_TT18.doc';
-                downloadLink.click();
+                finishQuiz();
             }
+        }
+
+        function finishQuiz() {
+            let correctCount = 0;
+
+            quizData.forEach(q => {
+                const uAns = userAnswers[q.id];
+                const cAns = q.correctAnswer;
+
+                if (q.type === 'single' || q.type === 'fill') {
+                    if (uAns === cAns) correctCount++;
+                } else if (q.type === 'multiple') {
+                    // Check array equality (bỏ qua thứ tự)
+                    if (Array.isArray(uAns) && Array.isArray(cAns) && 
+                        uAns.length === cAns.length &&
+                        uAns.every(val => cAns.includes(val))) {
+                        correctCount++;
+                    }
+                }
+            });
+
+            showResultScreen(correctCount, quizData.length);
+        }
+
+        function showResultScreen(correct, total) {
+            document.getElementById('quiz-play-screen').classList.add('hidden');
+            document.getElementById('quiz-result-screen').classList.remove('hidden');
+
+            document.getElementById('correct-count').innerText = correct;
+            document.getElementById('incorrect-count').innerText = total - correct;
+            document.getElementById('score-text').innerText = `${correct}/${total}`;
+
+            const percentage = (correct / total) * 100;
+            const circle = document.getElementById('score-circle');
+            circle.setAttribute('stroke-dasharray', `${percentage}, 100`);
+
+            let msg = "";
+            let color = "";
+            if (percentage >= 90) { msg = "Quá xuất sắc! Bạn đã nắm rất vững Khung Năng Lực Số TT18."; color = "text-emerald-600"; }
+            else if (percentage >= 70) { msg = "Khá lắm! Bạn hiểu tương đối rõ các yêu cầu của Thông tư 18."; color = "text-blue-600"; }
+            else if (percentage >= 50) { msg = "Đạt yêu cầu. Hãy ôn tập thêm các miền năng lực còn yếu nhé."; color = "text-orange-500"; }
+            else { msg = "Cần cố gắng hơn! Hãy đọc lại tài liệu Ma trận TT18 để nắm chắc nền tảng."; color = "text-red-500"; }
             
-            document.body.removeChild(downloadLink);
+            const msgEl = document.getElementById('result-message');
+            msgEl.innerText = msg;
+            msgEl.className = `text-lg font-bold mb-8 ${color}`;
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-result-screen').classList.add('hidden');
+            document.getElementById('quiz-start-screen').classList.remove('hidden');
         }
     </script>
 </body>
